@@ -2,7 +2,7 @@
 
 === Bearbeitet von
 
-* Vorname Nachname
+* Dinah Bolli
 
 === Abgabe
 
@@ -33,7 +33,7 @@ Dementsprechend besteht das Assignment aus drei Teilen
 ** die beiden Explorer müssen LazyLoading, Sortieren und Filtern unterstützen
 ** die Editoren unterstützen Mehrsprachigkeit, Input-Validierung und Undo/Redo
 ** das ist eine Einzelarbeit
-* _Entwurf_ der _nächsten_ Applikations-Version.
+* _Entwurf_ der _nächsten_ Applikations-Version. mit K. Stutz
 ** Wie sieht das aus Benutzersicht optimale Interaktions-Konzept für `Metropolis 2.0` aus?
 ** Wie ist das optimale Zusammenspiel zwischen den beiden Explorern?
 ** Was soll passieren, wenn im `CountryExplorer` ein Land selektiert wird?
