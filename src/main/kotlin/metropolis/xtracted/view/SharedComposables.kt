@@ -256,5 +256,8 @@ fun Number?.pp(pattern: String, nullFormat: String = ""): String {
     return if (null == this) nullFormat else pattern.format(CH, this)
 }
 
+fun Number?.format(pattern: String, nullFormat : String = "?", locale: Locale = CH): String =
+    if (null == this) nullFormat else pattern.format(locale, this)
+
 fun String?.format(nullFormat : String = "") = this ?: nullFormat
 
