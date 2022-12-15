@@ -80,6 +80,30 @@ fun doubleAttribute(id               : AttributeId,
              )
 
 
+fun intAttribute(id               : AttributeId,
+                    value            : Int?,
+                    validationRegex  : Regex                                                              = intCHRegex,
+                    semanticValidator: (Int?) -> ValidationResult                                         = { ValidationResult(true, null) },
+                    unit             : String                                                             = "",
+                    required         : Boolean                                                            = false,
+                    readOnly         : Boolean                                                            = false,
+                    dependentAttributes: Map<AttributeId, (Attribute<Int>, Attribute<*>) -> Attribute<*>> = emptyMap())  =
+    Attribute(id            = id,
+        value               = value,
+        persistedValue      = value,
+        valueAsText         = value.format(pattern = "%,d", nullFormat = ""),
+        formatter           = { value, userInput -> value.format(pattern = "%,", nullFormat = "") },
+        converter           = { it.asInt() },
+        unit                = unit,
+        required            = required,
+        readOnly            = readOnly,
+        syntaxValidator     = { it.matches(validationRegex).asValidationResult(ErrorMessage.NOT_AN_INT) },
+        semanticValidator   = semanticValidator,
+        validationResult    = ValidationResult(true, null),
+        span                = 1,
+        dependentAttributes = dependentAttributes
+    )
+
 interface AttributeId : Translatable
 
 data class ValidationResult(val valid: Boolean, val message: Translatable?)
@@ -99,5 +123,6 @@ private fun String.asDouble() = trim().replace("${chGroupingSeparator}", "").toD
 private fun String.asInt() = trim().replace("${chGroupingSeparator}", "").toIntOrNull()
 
 private enum class ErrorMessage(override val german: String, override val english: String) : Translatable {
-    NOT_A_DOUBLE("keine Kommazahl", "not a decimal")
+    NOT_A_DOUBLE("keine Kommazahl", "not a decimal"),
+    NOT_AN_INT("keine Zahl", "not a number")
 }
