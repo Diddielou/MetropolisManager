@@ -1,7 +1,6 @@
-package metropolis.hello.view
+package metropolis.metropolis.view
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
@@ -14,11 +13,11 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.hello.data.HelloState
+import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.view.VulcanSalute
 
 @Composable
-fun ApplicationScope.HelloWindow(state: HelloState) {
+fun ApplicationScope.HelloWindow(state: MetropolisState) {
     Window(onCloseRequest = ::exitApplication,
            title          = state.title,
            state          = rememberWindowState(width    = 400.dp,
@@ -30,7 +29,7 @@ fun ApplicationScope.HelloWindow(state: HelloState) {
 }
 
 @Composable
-private fun HelloUi(state: HelloState) {
+private fun HelloUi(state: MetropolisState) {
     Column(modifier            = Modifier.fillMaxSize(),
            horizontalAlignment = Alignment.CenterHorizontally,
            verticalArrangement = Arrangement.Center) {
