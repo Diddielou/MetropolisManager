@@ -146,8 +146,18 @@ fun <T> Table(tableState  : TableState<T>,
                  fontSize = 9.sp,
                  modifier = Modifier.align(Alignment.BottomStart)
                 )
+            //FooterInfo(filteredCount, totalCount, modifier = Modifier.align(Alignment.BottomStart)) // TODO show modified Date somewhere
         }
     }
+}
+
+@Composable
+fun FooterInfo(filteredCount: Int, totalCount: Int, modifiedDate: String?, modifier: Modifier){
+    val dateText = if(modifiedDate!=null) ", last modified: $modifiedDate" else ""
+    Text(text     = "$filteredCount/$totalCount $dateText",
+        fontSize = 9.sp,
+        modifier = modifier
+    )
 }
 
 @Composable
