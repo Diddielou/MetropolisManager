@@ -17,7 +17,8 @@ private const val ELLIPSES = "..."
 fun cityController(repository: LazyRepository<City>) =
     LazyTableController(title = "Cities of the world",
         repository = repository,
-        defaultItem = City(-999, ELLIPSES, null, null, 0.0, 0.0, ELLIPSES, ELLIPSES, ELLIPSES, null, null, null, 0, null, 0, ELLIPSES, LocalDate.now()),
+        defaultItem = City(-999, ELLIPSES, ELLIPSES, ELLIPSES, 0),
+        //defaultItem = City(-999, ELLIPSES, null, null, 0.0, 0.0, ELLIPSES, ELLIPSES, ELLIPSES, null, null, 0, null, 0, ELLIPSES, LocalDate.now()),
         columns = listOf(
             StringColumn(header = "Name",
             width = 150.dp,
@@ -25,7 +26,14 @@ fun cityController(repository: LazyRepository<City>) =
             fixed = true,
             dbColumn = CityColumn.NAME,
             valueProvider = { it.name }
-        ),
+            ),
+            StringColumn(header = "Alternate names",
+                width           = 350.dp,
+                alignment       = Alignment.CenterStart,
+                fixed           = false,
+                dbColumn        = CityColumn.ALTERNATE_NAMES,
+                valueProvider   = { it.alternateNames }
+            ),
             StringColumn(header = "Country code",
                 width           = 100.dp,
                 alignment       = Alignment.CenterStart,
@@ -33,6 +41,15 @@ fun cityController(repository: LazyRepository<City>) =
                 dbColumn        = CityColumn.COUNTRY_CODE,
                 valueProvider   = { it.countryCode }
             ),
+            IntColumn(header    = "Population",
+                width           = 100.dp,
+                alignment       = Alignment.CenterStart,
+                fixed           = true,
+                dbColumn        = CityColumn.POPULATION,
+                valueProvider   = { it.population },
+                formatter = { it.format("%,d") }
+            ),
+            /*
             DoubleColumn(header = "Latitude",
                 width           = 75.dp,
                 alignment       = Alignment.CenterEnd,
@@ -48,14 +65,6 @@ fun cityController(repository: LazyRepository<City>) =
                 dbColumn        = CityColumn.LONGITUDE,
                 valueProvider   = { it.longitude },
                 formatter       = { it.format("%,.1f") }
-            ),
-            IntColumn(header    = "Population",
-                width           = 100.dp,
-                alignment       = Alignment.CenterStart,
-                fixed           = true,
-                dbColumn        = CityColumn.POPULATION,
-                valueProvider   = { it.population },
-                formatter = { it.format("%,d") }
             ),
             IntColumn(header    = "m.a.s.l",
                 width           = 75.dp,
@@ -79,12 +88,6 @@ fun cityController(repository: LazyRepository<City>) =
                 dbColumn        = CityColumn.MODIFICATION_DATE,
                 valueProvider   = { it.modificationDate.toString() }
             ),
-            StringColumn(header = "Alternate names",
-                width           = 350.dp,
-                alignment       = Alignment.CenterStart,
-                fixed           = false,
-                dbColumn        = CityColumn.ALTERNATE_NAMES,
-                valueProvider   = { it.alternateNames }
-            ),
+             */
             // TODO Modified date only view
         ))

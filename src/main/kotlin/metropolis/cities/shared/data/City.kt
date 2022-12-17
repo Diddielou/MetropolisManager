@@ -1,21 +1,24 @@
 package metropolis.cities.shared.data
 
+import metropolis.xtracted.repository.Identifiable
 import java.time.LocalDate
 
-data class City(val id              : Int,
+data class City(override val id     : Int,
                 val name            : String,
-                val asciiName       : String?,
                 val alternateNames  : String?,
-                val latitude        : Double,
-                val longitude       : Double,
-                val featureClass    : String,
-                val featureCode     : String,
                 val countryCode     : String,
-                val cc2             : String?,
-                val admin1Code      : String?,
-                val admin2Code      : String?,
-                val population      : Int,
-                val elevation       : Int?,
-                val masl            : Int, // dem
-                val timeZone        : String,
-                val modificationDate : LocalDate)
+                val population      : Int) : Identifiable
+
+/*
+val asciiName       : String?,
+val latitude        : Double,
+val longitude       : Double,
+val featureClass    : String = "P",
+val featureCode     : String,
+val admin1Code      : String?,
+val admin2Code      : String?,
+val elevation       : Int?,
+val masl            : Int, // dem
+val timeZone        : String,
+val modificationDate : LocalDate = LocalDate.now()) : Identifiable
+ */

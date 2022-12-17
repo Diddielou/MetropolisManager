@@ -3,9 +3,12 @@ package metropolis.cities.shared.repository
 import metropolis.cities.shared.data.City
 import metropolis.xtracted.data.DbColumn
 import metropolis.xtracted.repository.LazyRepository
+import metropolis.xtracted.repository.CrudRepository
 import metropolis.cities.shared.repository.CityColumn.*
+import metropolis.xtracted.repository.asSql
 import java.time.LocalDate
 
+private const val TABLE = "CITY"
 enum class CityColumn : DbColumn {
     ID,
     NAME,
@@ -30,46 +33,94 @@ enum class CityColumn : DbColumn {
 
 fun cityRepository(url: String) =
     LazyRepository(url = url,
-        table = "CITY",
-        dataColumns = listOf(ID,
+        table = TABLE,
+        dataColumns = listOf(
+            ID,
             NAME,
-            ASCII_NAME,
             ALTERNATE_NAMES,
+            COUNTRY_CODE,
+            POPULATION
+        /*
+            ASCII_NAME,
             LATITUDE,
             LONGITUDE,
             FEATURE_CLASS,
             FEATURE_CODE,
-            COUNTRY_CODE,
             CC2,
             ADMIN1_CODE,
             ADMIN2_CODE,
-            POPULATION,
             ELEVATION,
             DEM,
             TIMEZONE,
-            MODIFICATION_DATE),
+            MODIFICATION_DATE
+         */
+        ),
         idColumn = ID,
         mapper = {
-            City(id = getInt(ID.name),
+            City(
+                id = getInt(ID.name),
                 name = getString(NAME.name),
+                alternateNames = getString(ALTERNATE_NAMES.name),
+                countryCode = getString(COUNTRY_CODE.name),
+                population = getInt(POPULATION.name)
+                /*
                 asciiName = getString(ASCII_NAME.name),
-                        alternateNames = getString(ALTERNATE_NAMES.name),
-                        latitude = getDouble(LATITUDE.name),
-                        longitude = getDouble(LONGITUDE.name),
-                        featureClass = getString(FEATURE_CLASS.name),
-                        featureCode = getString(FEATURE_CODE.name),
-                        countryCode = getString(COUNTRY_CODE.name),
-                        cc2 = getString(CC2.name),
-                        admin1Code = getString(ADMIN1_CODE.name),
-                        admin2Code = getString(ADMIN2_CODE.name),
-                        population = getInt(POPULATION.name),
-                        elevation = getInt(ELEVATION.name),
-                        masl = getInt(DEM.name),
-                        timeZone = getString(TIMEZONE.name),
-                        modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name))
+                latitude = getDouble(LATITUDE.name),
+                longitude = getDouble(LONGITUDE.name),
+                featureClass = getString(FEATURE_CLASS.name),
+                featureCode = getString(FEATURE_CODE.name),
+                admin1Code = getString(ADMIN1_CODE.name),
+                admin2Code = getString(ADMIN2_CODE.name),
+                elevation = getInt(ELEVATION.name),
+                masl = getInt(DEM.name),
+                timeZone = getString(TIMEZONE.name),
+                modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name))
+                 */
                 )
         })
 
+fun cityCrudRepository(url: String) =
+    CrudRepository(url = url,
+        table = TABLE,
+        idColumn = ID,
+        dataColumns = mapOf(
+            NAME            to { it.name.asSql() },
+            ALTERNATE_NAMES to { it.alternateNames?.asSql() },
+            COUNTRY_CODE    to { it.countryCode.asSql() },
+            POPULATION      to { it.population.toString().asSql() }
+            /*
+            ASCII_NAME      to { it.asciiName?.asSql() },
+            LATITUDE        to { it.latitude.toString().asSql() },
+            LONGITUDE       to { it.longitude.toString().asSql() },
+            FEATURE_CODE    to { it.featureCode.asSql() },
+            ADMIN1_CODE     to { it.admin1Code?.asSql() },
+            ADMIN2_CODE     to { it.admin2Code?.asSql() },
+            ELEVATION       to { it.elevation?.toString()?.asSql() },
+            DEM             to { it.masl.toString().asSql() },
+            TIMEZONE        to { it.timeZone.asSql() }
+            */
+        ),
+        mapper = { City( // Alle Felder ausser featureClass
+            id              = getInt(ID.name),
+            name            = getString(NAME.name),
+            alternateNames  = getString(ALTERNATE_NAMES.name),
+            countryCode     = getString(COUNTRY_CODE.name),
+            population      = getInt(POPULATION.name)
+        )}
+            /*
+            asciiName = getString(ASCII_NAME.name),
+            latitude = getDouble(LATITUDE.name),
+            longitude = getDouble(LONGITUDE.name),
+            featureClass = "P", // TODO
+            featureCode = getString(FEATURE_CODE.name),
+            admin1Code = getString(ADMIN1_CODE.name),
+            admin2Code = getString(ADMIN2_CODE.name),
+            elevation = getInt(ELEVATION.name),
+            masl = getInt(DEM.name),
+            timeZone = getString(TIMEZONE.name),
+            modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name)))
+             */
+    )
 /*
 create table CITY
 (

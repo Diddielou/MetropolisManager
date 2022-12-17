@@ -26,12 +26,12 @@ fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
                                            trigger     : (LazyTableAction) -> Unit) {
     Window(title          = state.title,
         onCloseRequest = ::exitApplication,
-        state          = rememberWindowState(width    = 1200.dp,
+        state          = rememberWindowState(
+            width    = 785.dp,
             height   = 500.dp,
             position = WindowPosition(Alignment.Center)
         )
     ) {
-
         CityExplorerUI(state, dataProvider, idProvider, trigger)
     }
 }
