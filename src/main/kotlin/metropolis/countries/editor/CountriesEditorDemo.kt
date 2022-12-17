@@ -22,9 +22,7 @@ fun main() {
 
     application {
         controller.initializeUiScope(rememberCoroutineScope())
-
         CountryEditorWindow(state   = controller.state,
             trigger = {controller.triggerAction(it)})
     }
-
 }

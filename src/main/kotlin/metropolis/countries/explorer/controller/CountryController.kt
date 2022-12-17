@@ -16,20 +16,15 @@ private const val ELLIPSES = "..."
 fun countryController(repository: LazyRepository<Country>) =
     LazyTableController(title       = "Countries of the World",
         repository  = repository,
-        defaultItem = Country(-999, ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, null, null, null),
-        columns     = listOf(StringColumn(header        = "Name",
-            width         = 250.dp,
-            alignment     = Alignment.CenterStart,
-            fixed         = true,
-            dbColumn      = CountryColumn.NAME,
-            valueProvider = { it.name }
-        ),
-            StringColumn(header        = "ISO2",
-                width         = 80.dp,
-                alignment     = Alignment.Center,
+        defaultItem = Country(-999, ELLIPSES, ELLIPSES, 0.0, 0),
+        //defaultItem = Country(-999, ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, null, null, null),
+        columns     = listOf(
+            StringColumn(header        = "Name",
+                width         = 250.dp,
+                alignment     = Alignment.CenterStart,
                 fixed         = true,
-                dbColumn      = CountryColumn.ISO_ALPHA2,
-                valueProvider = { it.isoAlpha2 }
+                dbColumn      = CountryColumn.NAME,
+                valueProvider = { it.name }
             ),
             StringColumn(header        = "Capital",
                 width         = 250.dp,
@@ -53,6 +48,14 @@ fun countryController(repository: LazyRepository<Country>) =
                 dbColumn      = CountryColumn.POPULATION,
                 valueProvider = { it.population },
                 formatter     = { it.format("%,d") }
+            )
+            /*
+            StringColumn(header        = "ISO2",
+                width         = 80.dp,
+                alignment     = Alignment.Center,
+                fixed         = true,
+                dbColumn      = CountryColumn.ISO_ALPHA2,
+                valueProvider = { it.isoAlpha2 }
             ),
             StringColumn(header        = "Continent",
                 width         = 100.dp,
@@ -81,6 +84,6 @@ fun countryController(repository: LazyRepository<Country>) =
                 fixed         = false,
                 dbColumn      = CountryColumn.NEIGHBOURS,
                 valueProvider = { it.neighbours }
-            )
+             */
         )
     )

@@ -34,32 +34,38 @@ fun countryLazyRepository(url: String) =
     LazyRepository(url         = url,
         table       = TABLE,
         dataColumns = listOf(
-            ISO_ALPHA2,
             ISO_NUMERIC,
             NAME,
             CAPITAL,
             AREA_IN_SQKM,
-            POPULATION,
+            POPULATION
+            /*
             CONTINENT,
+            ISO_ALPHA2,
             CURRENCY_NAME,
             CURRENCY_CODE,
             LANGUAGES,
             NEIGHBOURS
+             */
         ),
         idColumn    = ISO_NUMERIC,
-        mapper      = { Country(
-            isoAlpha2    = getString(ISO_ALPHA2.name),
-            id           = getInt(ISO_NUMERIC.name),
-            name         = getString(NAME.name),
-            capital      = getString(CAPITAL.name),
-            areaSqm     = getDouble(AREA_IN_SQKM.name),
-            population   = getInt(POPULATION.name),
-            continent    = getString(CONTINENT.name),
-            currencyName = getString(CURRENCY_NAME.name),
-            currencyCode = getString(CURRENCY_CODE.name),
-            languages    = getString(LANGUAGES.name),
-            neighbours   = getString(NEIGHBOURS.name)) }
-    )
+        mapper      = {
+            Country(
+                id           = getInt(ISO_NUMERIC.name),
+                name         = getString(NAME.name),
+                capital      = getString(CAPITAL.name),
+                areaSqm      = getDouble(AREA_IN_SQKM.name),
+                population   = getInt(POPULATION.name)
+                /*
+                    continent    = getString(CONTINENT.name),
+                    isoAlpha2    = getString(ISO_ALPHA2.name),
+                    currencyName = getString(CURRENCY_NAME.name),
+                    currencyCode = getString(CURRENCY_CODE.name),
+                    languages    = getString(LANGUAGES.name),
+                    neighbours   = getString(NEIGHBOURS.name)) }
+                 */
+            )
+        })
 
 fun countryCrudRepository(url: String) =
     CrudRepository(url = url,
@@ -67,31 +73,35 @@ fun countryCrudRepository(url: String) =
         idColumn = ISO_NUMERIC,
         dataColumns = mapOf(
             NAME            to { it.name.asSql() },
-            ISO_ALPHA2      to { it.isoAlpha2.asSql() },
             CAPITAL         to { it.capital?.asSql() },
             AREA_IN_SQKM    to { it.areaSqm.toString().asSql() },
-            POPULATION      to { it.population.toString().asSql() },
+            POPULATION      to { it.population.toString().asSql() }
+            /*
             CONTINENT       to { it.continent.asSql() },
+            ISO_ALPHA2      to { it.isoAlpha2.asSql() },
             CURRENCY_NAME   to { it.currencyName?.asSql() },
             CURRENCY_CODE   to { it.currencyCode?.asSql() },
             LANGUAGES       to { it.languages?.asSql() },
             NEIGHBOURS      to { it.neighbours?.asSql() }
+             */
         ),
-
         mapper = { Country(
-            isoAlpha2    = getString(ISO_ALPHA2.name),
             id           = getInt(ISO_NUMERIC.name),
             name         = getString(NAME.name),
             capital      = getString(CAPITAL.name),
-            areaSqm     = getDouble(AREA_IN_SQKM.name),
-            population   = getInt(POPULATION.name),
-            continent    = getString(CONTINENT.name),
-            currencyName = getString(CURRENCY_NAME.name),
-            currencyCode = getString(CURRENCY_CODE.name),
-            languages    = getString(LANGUAGES.name),
-            neighbours   = getString(NEIGHBOURS.name))
-            }
-        )
+            areaSqm      = getDouble(AREA_IN_SQKM.name),
+            population   = getInt(POPULATION.name)
+        )}
+        /*
+        continent    = getString(CONTINENT.name),
+        isoAlpha2    = getString(ISO_ALPHA2.name),
+        currencyName = getString(CURRENCY_NAME.name),
+        currencyCode = getString(CURRENCY_CODE.name),
+        languages    = getString(LANGUAGES.name),
+        neighbours   = getString(NEIGHBOURS.name))
+         */
+    )
+
 
 /*
 CREATE TABLE COUNTRY (

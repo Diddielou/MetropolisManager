@@ -14,39 +14,47 @@ fun countryEditor(id: Int, repository: CrudRepository<Country>) : EditorControll
         locale = ch,
         repository = repository,
         asData = {
-            Country(id = id,
-                name = it[Id.NAME],
+            Country(id      = id,
+                name        = it[Id.NAME],
+                capital     = it[Id.CAPITAL],
+                areaSqm     = it[Id.AREA_SQM],
+                population  = it[Id.POPULATION]
+                /*
+                continent   = it[Id.CONTINENT],
                 isoAlpha2 = it[Id.ISO_ALPHA2],
-                capital = it[Id.CAPITAL],
-                areaSqm = it[Id.AREA_SQM],
-                population = it[Id.POPULATION],
-                continent = it[Id.CONTINENT],
                 currencyName = it[Id.CURRENCY_NAME],
                 currencyCode = it[Id.CURRENCY_CODE],
                 languages = it[Id.LANGUAGES],
                 neighbours = it[Id.NEIGHBOURS]
+                 */
                 )},
         asAttributeList = { country -> listOf(
-            (stringAttribute(id = Id.NAME,
-                value = country.name,
+            (stringAttribute(
+                id       = Id.NAME,
+                value    = country.name,
                 required = true,
                 syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (stringAttribute(
+                id       = Id.CAPITAL,
+                value    = country.capital,
+                required = true)),
+            (doubleAttribute(
+                id       = Id.AREA_SQM,
+                value    = country.areaSqm,
+                required = true,
+                unit     = "km²"
+                )),
+            (intAttribute(
+                id       = Id.POPULATION,
+                value    = country.population,
+                required = true)),
+            /*
+            (stringAttribute(
+                id       = Id.CONTINENT,
+                value    = country.continent,
+                required = true)),
             (stringAttribute(id = Id.ISO_ALPHA2,
                 value = country.isoAlpha2,
-                required = true)),
-            (stringAttribute(id = Id.CAPITAL,
-                value = country.capital,
-                required = true)),
-            (doubleAttribute(id = Id.AREA_SQM,
-                value = country.areaSqm,
-                required = true,
-                unit = "km²"
-                )),
-            (intAttribute(id = Id.POPULATION,
-                value = country.population,
-                required = true)),
-            (stringAttribute(id = Id.CONTINENT,
-                value = country.continent,
                 required = true)),
             (stringAttribute(id = Id.CURRENCY_NAME,
                 value = country.currencyName,
@@ -60,11 +68,10 @@ fun countryEditor(id: Int, repository: CrudRepository<Country>) : EditorControll
             (stringAttribute(id = Id.NEIGHBOURS,
                 value = country.neighbours,
                 required = true))
+             */
         ) }
     )
 }
-
-
 
 enum class Id(override val german: String, override val english: String) : AttributeId {
     NAME          ("Name",          "Name"),
@@ -80,7 +87,7 @@ enum class Id(override val german: String, override val english: String) : Attri
 }
 
 private enum class Message(override val german: String, override val english: String) : Translatable {
-    TITLE             ("Länder Editor"   , "Swiss Mountain EditorCountries Editor"),
+    TITLE             ("Länder Editor"   , "Countries Editor"),
     TOO_HIGH          ("zu hoch"                 , "too high"),
     TOO_LOW           ("zu niedrig"              , "too low"),
     NAME_TOO_LONG     ("Name zu lang"            , "name too long")

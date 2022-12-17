@@ -69,7 +69,6 @@ fun VerticalDivider(){
                            .background(MaterialTheme.colors.onPrimary.copy(alpha = 0.5f)))
 }
 
-
 @Composable
 fun<T> SelectionBox(currentSelectionTitle: String, allItems: List<T>, listItem: @Composable (T) -> Unit, onClick: () -> Unit, onItemClick: (T) -> Unit) {
     var dropDownExpanded by remember { mutableStateOf(false) }
@@ -261,3 +260,11 @@ fun Number?.format(pattern: String, nullFormat : String = "?", locale: Locale = 
 
 fun String?.format(nullFormat : String = "") = this ?: nullFormat
 
+@Composable
+fun EditorHeadline(text: String, fontSize: TextUnit){
+    Text(text       = text,
+        maxLines   = 1,
+        overflow   = TextOverflow.Ellipsis,
+        fontSize   = fontSize,
+        fontWeight = FontWeight.ExtraLight)
+}

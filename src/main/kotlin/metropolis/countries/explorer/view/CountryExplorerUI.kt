@@ -24,13 +24,12 @@ fun ApplicationScope.CountryExplorerWindow(state       : TableState<Country>,
                                            idProvider  : (Country) -> Int,
                                            trigger     : (LazyTableAction) -> Unit) {
     Window(title          = state.title,
-        onCloseRequest = ::exitApplication,
-        state          = rememberWindowState(width    = 1200.dp,
-            height   = 500.dp,
-            position = WindowPosition(Alignment.Center)
+           onCloseRequest = ::exitApplication,
+           state          = rememberWindowState(width    = 850.dp,
+                                                height   = 500.dp,
+                                                position = WindowPosition(Alignment.Center)
         )
     ) {
-
         CountryExplorerUI(state, dataProvider, idProvider, trigger)
     }
 }
