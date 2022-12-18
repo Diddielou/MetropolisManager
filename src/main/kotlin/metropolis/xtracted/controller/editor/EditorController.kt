@@ -16,7 +16,6 @@ import metropolis.xtracted.repository.Identifiable
 
 val ch = Locale("de", "CH")
 
-
 class EditorController<D: Identifiable>(val id: Int,
                                         val repository      : CrudRepository<D>,
                                         val asData          : (List<Attribute<*>>) -> D,

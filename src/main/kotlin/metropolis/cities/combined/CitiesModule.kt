@@ -14,11 +14,12 @@ import java.util.logging.Logger
 fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.WARNING
 
+    val initiallySelectedCityId = 2661552
+
     val url = "/data/metropolisDB".urlFromResources()
     val cityLazyRepository = cityLazyTableRepository(url)
     val cityCrudRepository = cityCrudRepository(url)
-    val controller = CitiesModuleController(cityLazyRepository, cityCrudRepository)
-
+    val controller = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
     application {
         controller.state.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
         controller.state.cityEditorController.initializeUiScope(rememberCoroutineScope())

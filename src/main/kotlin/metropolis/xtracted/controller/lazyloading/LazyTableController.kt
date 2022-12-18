@@ -21,7 +21,9 @@ import metropolis.xtracted.repository.LazyRepository
 class LazyTableController<T>(title                  : String,
                              private val repository : LazyRepository<T>,
                              columns                : List<TableColumn<T, *>>,
-                             private val defaultItem: T) :
+                             private val defaultItem: T,
+                             val onSelectionChange: (Int) -> Unit = {}
+    ) :
         ControllerBase<TableState<T>, LazyTableAction>(initialState = TableState(title            = title,
                                                                                  triggerRecompose = false,
                                                                                  allIds           = repository.readFilteredIds(emptyList(), SortDirective(null)),
@@ -45,7 +47,7 @@ class LazyTableController<T>(title                  : String,
         cache.computeIfAbsent(id) {
             uiScope.launch {
                 val deferred = ioScope.async {
-                    delay(60) // nur zur Simulation eines langsamen DB-Zugriffs
+                    // delay(60) nur zur Simulation eines langsamen DB-Zugriffs
                     repository.read(id)!!
                 }
                 cache[id] = deferred.await()
@@ -67,10 +69,13 @@ class LazyTableController<T>(title                  : String,
             is LazyTableAction.ToggleSortOrder<*> -> toggleSortOrder(action.column as TableColumn<T, *>)
         }
 
-    private fun changeSelection(id: Int) =
-         state.copy(selectedId = id)
+    private fun changeSelection(id: Int) : TableState<T> {
+        val newState = state.copy(selectedId = id)
+        onSelectionChange(id)
+        return newState
+    }
 
-    private  fun selectNext() =
+    private fun selectNext() =
         with(state) {
             focusRequester.requestFocus()
             val nextIdx = (allIds.indexOf(selectedId ?: -1) + 1).coerceAtMost(filteredCount - 1)

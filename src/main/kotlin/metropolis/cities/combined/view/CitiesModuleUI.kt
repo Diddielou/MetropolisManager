@@ -44,6 +44,7 @@ fun CitiesModuleUi(state: CitiesModuleState) {
             }
         },
         editor = {
+
             CityEditorUi(
                 state = editorController.state,
                 trigger = { editorController.triggerAction(it) }
