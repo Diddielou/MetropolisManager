@@ -16,9 +16,9 @@ class CountriesModuleController(
 
     var state by mutableStateOf(
         CountriesModuleState(
-            title = "Cities Module Demo",
-            countryEditor = countryEditorController(332, crudRepository),
-            countryLazyTableController = countryLazyTableController(lazyRepository)
+            title = "Countries Module Demo",
+            countryLazyTableController = countryLazyTableController(lazyRepository),
+            countryEditorController = countryEditorController(332, crudRepository),
         )
     )
 

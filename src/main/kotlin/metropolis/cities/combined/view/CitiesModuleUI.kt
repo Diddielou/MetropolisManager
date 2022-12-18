@@ -28,7 +28,7 @@ fun ApplicationScope.CitiesModuleWindow(state: CitiesModuleState) {
 
 @Composable
 fun CitiesModuleUi(state: CitiesModuleState) {
-    val editorController = state.cityEditor
+    val editorController = state.cityEditorController
     val explorerController = state.cityLazyTableController
 
     MasterDetail(

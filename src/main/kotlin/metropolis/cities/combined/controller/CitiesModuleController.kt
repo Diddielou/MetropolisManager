@@ -17,8 +17,8 @@ class CitiesModuleController(
     var state by mutableStateOf(
         CitiesModuleState(
             title = "Cities Module Demo",
-            cityEditor = cityEditorController(2661552, crudRepository),
-            cityLazyTableController = cityLazyTableController(lazyRepository)
+            cityLazyTableController = cityLazyTableController(lazyRepository),
+            cityEditorController = cityEditorController(2661552, crudRepository)
         )
     )
 

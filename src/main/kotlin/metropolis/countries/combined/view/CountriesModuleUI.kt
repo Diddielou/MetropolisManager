@@ -28,7 +28,7 @@ fun ApplicationScope.CountriesModuleWindow(state: CountriesModuleState) {
 
 @Composable
 fun CountriesModuleUi(state: CountriesModuleState) {
-    val editorController = state.countryEditor
+    val editorController = state.countryEditorController
     val explorerController = state.countryLazyTableController
 
     MasterDetail(

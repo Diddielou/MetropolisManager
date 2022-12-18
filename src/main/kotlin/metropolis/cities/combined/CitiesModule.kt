@@ -21,7 +21,7 @@ fun main() {
 
     application {
         controller.state.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
-        controller.state.cityEditor.initializeUiScope(rememberCoroutineScope())
+        controller.state.cityEditorController.initializeUiScope(rememberCoroutineScope())
 
         CitiesModuleWindow(state = controller.state)
     }
