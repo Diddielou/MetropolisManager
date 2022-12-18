@@ -1,5 +1,6 @@
 package metropolis.xtracted.view
 
+import androidx.compose.foundation.*
 import java.awt.Cursor
 import java.awt.Toolkit
 import java.io.IOException
@@ -8,33 +9,10 @@ import java.net.URL
 import java.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.TooltipArea
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
@@ -59,6 +37,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import metropolis.cities.combined.model.CitiesModuleState
 
 
 @Composable
@@ -267,4 +246,52 @@ fun EditorHeadline(text: String, fontSize: TextUnit){
         overflow   = TextOverflow.Ellipsis,
         fontSize   = fontSize,
         fontWeight = FontWeight.ExtraLight)
+}
+
+
+@Composable
+fun MasterDetail(toolbar:  @Composable () -> Unit = {},
+                 explorer: @Composable () -> Unit,
+                 editor:   @Composable () -> Unit){
+    val padding = 20.dp
+    val elevation = 2.dp
+
+    Column {
+        TopAppBar(backgroundColor = MaterialTheme.colors.surface, // Color(0xFFFAFAFA)
+            contentPadding = PaddingValues(start = 8.dp, end = 4.dp)
+        ){
+            toolbar()
+        }
+        Row(modifier = Modifier.fillMaxSize().padding(padding),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.Top){
+            Card(elevation = elevation,
+                modifier   =  Modifier.weight(0.6f)) {
+                explorer()
+            }
+            Spacer(Modifier.width(padding))
+            Card(elevation = elevation,
+                modifier   =  Modifier.weight(0.4f)) {
+                editor()
+            }
+        }
+    }
+}
+
+@Composable
+fun TopBar(state: CitiesModuleState){
+    with(state){
+        AlignLeftRight() {
+            Welcome(text = state.title, modifier = Modifier)
+        }
+    }
+}
+
+@Composable
+fun Welcome(text: String, modifier: Modifier){
+    Text(text       = text,
+        style       = MaterialTheme.typography.h4,
+        modifier    = modifier,
+        color       = MaterialTheme.colors.primary
+    )
 }
