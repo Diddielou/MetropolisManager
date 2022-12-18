@@ -33,21 +33,43 @@ fun countryEditor(id: Int, repository: CrudRepository<Country>) : EditorControll
                 id       = Id.NAME,
                 value    = country.name,
                 required = true,
-                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+                syntaxValidator = { (it.length <= 200).asValidationResult(Message.TOO_LONG) })
+            ),
             (stringAttribute(
-                id       = Id.CAPITAL,
-                value    = country.capital,
-                required = true)),
+                id              = Id.CAPITAL,
+                value           = country.capital,
+                required        = true,
+                syntaxValidator = { (it.length <= 200).asValidationResult(Message.TOO_LONG) })
+            ),
             (doubleAttribute(
-                id       = Id.AREA_SQM,
-                value    = country.areaSqm,
-                required = true,
-                unit     = "km²"
-                )),
+                id                = Id.AREA_SQM,
+                value             = country.areaSqm,
+                required          = true,
+                unit              = "km²",
+                semanticValidator = { when {
+                    /* // TODO Katrin
+                    it == null -> ValidationResult(true,  null)
+                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
+                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
+                     */
+                    else       -> ValidationResult(true,  null)
+                } })
+            ),
+
             (intAttribute(
                 id       = Id.POPULATION,
                 value    = country.population,
-                required = true)),
+                required = true,
+                semanticValidator = { when {
+                    /* // TODO Katrin
+                    it == null -> ValidationResult(true,  null)
+                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
+                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
+                     */
+                    else       -> ValidationResult(true,  null)
+                } })
+            ),
+
             /*
             (stringAttribute(
                 id       = Id.CONTINENT,
@@ -88,9 +110,10 @@ enum class Id(override val german: String, override val english: String) : Attri
 
 private enum class Message(override val german: String, override val english: String) : Translatable {
     TITLE             ("Länder Editor"   , "Countries Editor"),
-    TOO_HIGH          ("zu hoch"                 , "too high"),
-    TOO_LOW           ("zu niedrig"              , "too low"),
-    NAME_TOO_LONG     ("Name zu lang"            , "name too long")
+    TOO_HIGH          ("zu hoch"         , "too high"),
+    TOO_LOW           ("zu niedrig"      , "too low"),
+    TOO_LONG          ("zu lang"         , "too long"),
+    TOO_SHORT         ("zu kurz"         , "too short")
 }
 
 /*

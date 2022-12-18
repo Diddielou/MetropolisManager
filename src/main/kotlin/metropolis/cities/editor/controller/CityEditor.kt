@@ -36,16 +36,36 @@ fun cityEditor(id: Int, repository: CrudRepository<City>) : EditorController<Cit
              */
             (stringAttribute(id = Id.NAME,
                 value = city.name,
-                required = true)),
+                required = true,
+                syntaxValidator = { (it.length <= 200).asValidationResult(Message.TOO_LONG) })
+            ),
             (stringAttribute(id = Id.ALTERNATE_NAMES,
                 value = city.alternateNames,
-                required = false)),
+                required = false,
+                syntaxValidator = { (it.length <= 10000).asValidationResult(Message.TOO_LONG) })
+            ),
             (stringAttribute(id = Id.COUNTRY_CODE,
                 value = city.countryCode,
-                required = true)),
+                required = true,
+                semanticValidator = { when {
+                    it == null      -> ValidationResult(true, null)
+                    it.length > 2   -> ValidationResult(false, Message.TOO_LONG)
+                    it.length < 2   -> ValidationResult(false, Message.TOO_SHORT)
+                    else            -> ValidationResult(true, null)
+                } })
+            ),
             (intAttribute(id = Id.POPULATION,
                 value = city.population,
-                required = true)),
+                required = true,
+                semanticValidator = { when {
+                    /* // TODO Katrin
+                    it == null -> ValidationResult(true,  null)
+                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
+                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
+                     */
+                    else       -> ValidationResult(true,  null)
+                } })
+            ),
             /*
             (stringAttribute(id = Id.ASCII_NAME,
                 value = city.asciiName,
@@ -94,7 +114,8 @@ enum class Id(override val german: String, override val english: String) : Attri
 
 private enum class Message(override val german: String, override val english: String) : Translatable {
     TITLE             ("Städte Editor"   , "City Editor"),
-    TOO_HIGH          ("zu hoch"                 , "too high"),
-    TOO_LOW           ("zu niedrig"              , "too low"),
-    NAME_TOO_LONG     ("Name zu lang"            , "name too long")
+    TOO_HIGH          ("zu hoch"         , "too high"),
+    TOO_LOW           ("zu niedrig"      , "too low"),
+    TOO_LONG          ("zu lang"         , "too long"),
+    TOO_SHORT         ("zu kurz"         , "too short")
 }
