@@ -55,10 +55,8 @@ class LazyTableController<T>(title                  : String,
                     recompose()
                 }
             }
-
             defaultItem
         }
-
 
     override fun executeAction(action: LazyTableAction) : TableState<T> =
         when (action) {
@@ -135,7 +133,6 @@ class LazyTableController<T>(title                  : String,
     }
 
     // einige Hilfsfunktionen
-
     private fun createFilterList(): List<Filter<*>> =
         buildList {
             state.columns.forEach {
@@ -157,7 +154,7 @@ class LazyTableController<T>(title                  : String,
             idx < lazyListState.firstVisibleItemIndex + lazyListState.layoutInfo.visibleItemsInfo.size
         }
 
-    private fun recompose() {
+    fun recompose() {
         state = state.copy(triggerRecompose = !state.triggerRecompose)
     }
 }

@@ -14,6 +14,7 @@ import java.util.logging.Logger
 fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.WARNING
 
+    // TODO make from country
     val initiallySelectedCityId = 2661552
 
     val url = "/data/metropolisDB".urlFromResources()

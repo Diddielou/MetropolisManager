@@ -21,10 +21,12 @@ class EditorController<D: Identifiable>(val id: Int,
                                         val asData          : (List<Attribute<*>>) -> D,
                                         val asAttributeList : (D) -> List<Attribute<*>>,
                                         title               : Translatable,
-                                        locale              : Locale) :
+                                        locale              : Locale,
+                                        var onEditorAction: () -> Unit = {}) :
         ControllerBase<EditorState<D>, EditorAction>(initialState = EditorState(title      = title,
                                                                                 locale     = locale,
-                                                                                attributes = asAttributeList(repository.read(id)!!))) {
+                                                                                attributes = asAttributeList(repository.read(id)!!))
+        ) {
 
     private val undoController = UndoController<EditorState<D>>()
 
@@ -59,9 +61,10 @@ class EditorController<D: Identifiable>(val id: Int,
             for(attribute in state.attributes){
                 add(attribute.copy(persistedValue = attribute.value))
             }
-
         }
-        return state.copy(attributes =  updatedAttributes)
+        onEditorAction()
+        //println("onEditorAction executed in save()")
+        return state.copy(attributes = updatedAttributes)
     }
 
     private fun undo() : EditorState<D>{
@@ -140,8 +143,7 @@ class EditorController<D: Identifiable>(val id: Int,
     }
 
     /**
-     *  to enable a "bulk-undo" we have to wait until there is no new action triggered
-     */
+     *  to enable a "bulk-undo" we have to wait until there is no new action triggered */
     private fun scheduleUndoStackUpdate(newState: EditorState<D>) {
         undoStackScheduler.scheduleTask {
             undoController.pushOnUndoStack(Snapshot(debounceStart, newState))

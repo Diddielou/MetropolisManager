@@ -12,7 +12,7 @@ import java.util.logging.LogManager
 import java.util.logging.Logger
 
 fun main() {
-    LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.WARNING
+    LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.INFO
 
     val initiallySelectedCountryId = 0
 
@@ -27,4 +27,5 @@ fun main() {
 
         CountriesModuleWindow(state = controller.state)
     }
+
 }

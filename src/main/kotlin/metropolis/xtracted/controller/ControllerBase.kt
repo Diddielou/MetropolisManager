@@ -34,7 +34,6 @@ abstract class ControllerBase<S, A: Action> (initialState: S){
                     val deferredNewState = ioScope.async {
                         executeAction(action)  // liefert den neuen TableState, der natürlich asynchron berechnet wird
                     }
-
                     state = deferredNewState.await() // warten bis der neue TableState bekannt ist (ohne UI zu blockieren)
                 }
             }

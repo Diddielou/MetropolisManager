@@ -7,7 +7,7 @@ import metropolis.xtracted.controller.editor.get
 import metropolis.xtracted.model.*
 import metropolis.xtracted.repository.CrudRepository
 
-fun countryEditorController(id: Int, repository: CrudRepository<Country>) : EditorController<Country> {
+fun countryEditorController(id: Int, repository: CrudRepository<Country>, onEditorAction: () -> Unit) : EditorController<Country> {
     return EditorController(
         id = id,
         title = Message.TITLE,
@@ -91,7 +91,8 @@ fun countryEditorController(id: Int, repository: CrudRepository<Country>) : Edit
                 value = country.neighbours,
                 required = true))
              */
-        ) }
+        ) },
+        onEditorAction = onEditorAction
     )
 }
 
@@ -99,7 +100,7 @@ enum class Id(override val german: String, override val english: String) : Attri
     NAME          ("Name",          "Name"),
     ISO_ALPHA2   ("ISO Alpha 2",   "ISO Alpha 2"),
     CAPITAL       ("Hauptstadt",    "Capital"),
-    AREA_SQM      ("Fläche (km²)",   "Area (km²)"),
+    AREA_SQM      ("Fläche",        "Area"),
     POPULATION    ("Bevölkerung",   "Population"),
     CONTINENT     ("Kontinent",     "Continent"),
     CURRENCY_NAME ("Währung",       "Currency"),

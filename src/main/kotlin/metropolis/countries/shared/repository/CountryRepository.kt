@@ -31,7 +31,9 @@ enum class CountryColumn : DbColumn {
 }
 
 fun countryLazyTableRepository(url: String) =
-    LazyRepository(url         = url,
+
+    LazyRepository(
+        url         = url,
         table       = TABLE,
         dataColumns = listOf(
             ISO_NUMERIC,
@@ -65,9 +67,10 @@ fun countryLazyTableRepository(url: String) =
                     neighbours   = getString(NEIGHBOURS.name)) }
                  */
             )
-        })
+        }
+    )
 
-fun countryCrudRepository(url: String) =
+fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
     CrudRepository(url = url,
         table = TABLE,
         idColumn = ISO_NUMERIC,
