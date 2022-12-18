@@ -34,7 +34,9 @@ class CrudRepository<D: Identifiable>(private val url        : String,
         update(url          = url,
                table        = table,
                id           = data.id,
-               setStatement = """SET $valueUpdates """)
+               setStatement = """SET $valueUpdates """,
+               idName = "$idColumn"
+            )
 
     }
 
