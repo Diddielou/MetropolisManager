@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import metropolis.cities.combined.model.CitiesModuleState
+import metropolis.countries.combined.model.CountriesModuleState
 
 
 @Composable
@@ -280,6 +281,15 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
 
 @Composable
 fun TopBar(state: CitiesModuleState){
+    with(state){
+        AlignLeftRight() {
+            Welcome(text = state.title, modifier = Modifier)
+        }
+    }
+}
+
+@Composable
+fun TopBar(state: CountriesModuleState){
     with(state){
         AlignLeftRight() {
             Welcome(text = state.title, modifier = Modifier)

@@ -13,7 +13,6 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cities.editor.controller.Id
 import metropolis.cities.shared.data.City
-import metropolis.countries.editor.view.CountryEditorUi
 import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.model.Attribute
 import metropolis.xtracted.model.EditorState

@@ -7,14 +7,14 @@ import java.util.logging.Logger
 import androidx.compose.ui.window.application
 import metropolis.countries.explorer.controller.countryLazyTableController
 import metropolis.countries.explorer.view.CountryExplorerWindow
-import metropolis.countries.shared.repository.countryLazyRepository
+import metropolis.countries.shared.repository.countryLazyTableRepository
 import metropolis.xtracted.repository.urlFromResources
 
 fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.WARNING
 
     val url = "/data/metropolisDB".urlFromResources()
-    val repository = countryLazyRepository(url)
+    val repository = countryLazyTableRepository(url)
     val controller = countryLazyTableController(repository)
 
     application {

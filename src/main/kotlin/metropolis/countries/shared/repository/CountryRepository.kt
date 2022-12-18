@@ -30,7 +30,7 @@ enum class CountryColumn : DbColumn {
     EQUIVALENT_FIPS_CODE
 }
 
-fun countryLazyRepository(url: String) =
+fun countryLazyTableRepository(url: String) =
     LazyRepository(url         = url,
         table       = TABLE,
         dataColumns = listOf(
