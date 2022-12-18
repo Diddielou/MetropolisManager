@@ -5,16 +5,14 @@ import androidx.compose.ui.unit.dp
 import metropolis.cities.shared.data.City
 import metropolis.cities.shared.repository.CityColumn
 import metropolis.xtracted.controller.lazyloading.LazyTableController
-import metropolis.xtracted.model.DoubleColumn
 import metropolis.xtracted.model.IntColumn
 import metropolis.xtracted.model.StringColumn
 import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.view.format
-import java.time.LocalDate
 
 private const val ELLIPSES = "..."
 
-fun cityController(repository: LazyRepository<City>) =
+fun cityLazyTableController(repository: LazyRepository<City>) =
     LazyTableController(title = "Cities of the world",
         repository = repository,
         defaultItem = City(-999, ELLIPSES, ELLIPSES, ELLIPSES, 0),
@@ -27,13 +25,6 @@ fun cityController(repository: LazyRepository<City>) =
             dbColumn = CityColumn.NAME,
             valueProvider = { it.name }
             ),
-            StringColumn(header = "Alternate names",
-                width           = 350.dp,
-                alignment       = Alignment.CenterStart,
-                fixed           = false,
-                dbColumn        = CityColumn.ALTERNATE_NAMES,
-                valueProvider   = { it.alternateNames }
-            ),
             StringColumn(header = "Country code",
                 width           = 100.dp,
                 alignment       = Alignment.CenterStart,
@@ -43,11 +34,18 @@ fun cityController(repository: LazyRepository<City>) =
             ),
             IntColumn(header    = "Population",
                 width           = 100.dp,
-                alignment       = Alignment.CenterStart,
+                alignment       = Alignment.Center,
                 fixed           = true,
                 dbColumn        = CityColumn.POPULATION,
                 valueProvider   = { it.population },
                 formatter = { it.format("%,d") }
+            ),
+            StringColumn(header = "Alternate names",
+                width           = 350.dp,
+                alignment       = Alignment.CenterStart,
+                fixed           = false,
+                dbColumn        = CityColumn.ALTERNATE_NAMES,
+                valueProvider   = { it.alternateNames }
             ),
             /*
             DoubleColumn(header = "Latitude",

@@ -6,7 +6,6 @@ import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.cities.shared.repository.CityColumn.*
 import metropolis.xtracted.repository.asSql
-import java.time.LocalDate
 
 private const val TABLE = "CITY"
 enum class CityColumn : DbColumn {
@@ -31,7 +30,7 @@ enum class CityColumn : DbColumn {
     MODIFICATION_DATE
 }
 
-fun cityRepository(url: String) =
+fun cityLazyTableRepository(url: String) =
     LazyRepository(url = url,
         table = TABLE,
         dataColumns = listOf(

@@ -7,7 +7,7 @@ import metropolis.xtracted.controller.editor.get
 import metropolis.xtracted.model.*
 import metropolis.xtracted.repository.CrudRepository
 
-fun cityEditor(id: Int, repository: CrudRepository<City>) : EditorController<City> {
+fun cityEditorController(id: Int, repository: CrudRepository<City>) : EditorController<City> {
     return EditorController(
         id = id,
         title = Message.TITLE,

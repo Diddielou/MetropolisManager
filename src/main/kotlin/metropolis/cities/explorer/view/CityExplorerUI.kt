@@ -21,9 +21,9 @@ import metropolis.xtracted.view.explorer.Table
 
 @Composable
 fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
-                                           dataProvider: (Int) -> City,
-                                           idProvider  : (City) -> Int,
-                                           trigger     : (LazyTableAction) -> Unit) {
+                                        dataProvider: (Int) -> City,
+                                        idProvider  : (City) -> Int,
+                                        trigger     : (LazyTableAction) -> Unit) {
     Window(title          = state.title,
         onCloseRequest = ::exitApplication,
         state          = rememberWindowState(
