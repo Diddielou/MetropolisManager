@@ -13,9 +13,9 @@ import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 
 class CitiesModuleController(
-    selectedCityId        : Int?,
-    val lazyRepository    : LazyRepository<City>,
-    val crudRepository    : CrudRepository<City>) {
+    selectedCityId     : Int?,
+    private val lazyRepository : LazyRepository<City>,
+    private val crudRepository : CrudRepository<City>) {
 
     var state by mutableStateOf(
         CitiesModuleState(

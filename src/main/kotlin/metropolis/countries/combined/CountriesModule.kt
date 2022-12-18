@@ -14,10 +14,12 @@ import java.util.logging.Logger
 fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.WARNING
 
+    val initiallySelectedCountryId = 0
+
     val url = "/data/metropolisDB".urlFromResources()
     val countryLazyRepository = countryLazyTableRepository(url)
     val countryCrudRepository = countryCrudRepository(url)
-    val controller = CountriesModuleController(countryLazyRepository, countryCrudRepository)
+    val controller = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
 
     application {
         controller.state.countryLazyTableController.initializeUiScope(rememberCoroutineScope())

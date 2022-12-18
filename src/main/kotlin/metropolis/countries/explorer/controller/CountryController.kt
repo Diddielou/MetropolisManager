@@ -13,7 +13,7 @@ import metropolis.xtracted.view.format
 
 private const val ELLIPSES = "..."
 
-fun countryLazyTableController(repository: LazyRepository<Country>) =
+fun countryLazyTableController(repository: LazyRepository<Country>, onSelectionChange: (Int) -> Unit = {}) =
     LazyTableController(title       = "Countries of the world",
         repository  = repository,
         defaultItem = Country(-999, ELLIPSES, ELLIPSES, 0.0, 0),
@@ -85,5 +85,6 @@ fun countryLazyTableController(repository: LazyRepository<Country>) =
                 dbColumn      = CountryColumn.NEIGHBOURS,
                 valueProvider = { it.neighbours }
              */
-        )
+        ),
+        onSelectionChange = onSelectionChange
     )
