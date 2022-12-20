@@ -16,7 +16,7 @@ fun main() {
     val url = "/data/metropolisDB".urlFromResources()
     val repository = cityCrudRepository(url)
     val selectedCityId = 2661552
-    val controller = cityEditorController(selectedCityId, repository)
+    val controller = cityEditorController(selectedCityId, repository, {})
 
     application {
         controller.initializeUiScope(rememberCoroutineScope())

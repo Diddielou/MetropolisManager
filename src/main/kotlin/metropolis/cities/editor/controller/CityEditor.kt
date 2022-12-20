@@ -7,7 +7,7 @@ import metropolis.xtracted.controller.editor.get
 import metropolis.xtracted.model.*
 import metropolis.xtracted.repository.CrudRepository
 
-fun cityEditorController(id: Int, repository: CrudRepository<City>) : EditorController<City> {
+fun cityEditorController(id: Int, repository: CrudRepository<City>, onEditorAction: () -> Unit) : EditorController<City> {
     return EditorController(
         id = id,
         title = Message.TITLE,
@@ -92,7 +92,8 @@ fun cityEditorController(id: Int, repository: CrudRepository<City>) : EditorCont
             (stringAttribute(id = Id.TIMEZONE,
                 value = city.timeZone,
                 required = true))*/
-        ) }
+        ) },
+        onEditorAction = onEditorAction
     )
 }
 
