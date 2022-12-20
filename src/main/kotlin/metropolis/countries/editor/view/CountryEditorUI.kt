@@ -72,9 +72,6 @@ private fun Header(state: EditorState<Country>) {
     val huge       = 42.sp
     val large      = 18.sp
 
-    //val continentString = continent.value ?: "" // continentString
-    //
-
     Row(modifier = Modifier.height(IntrinsicSize.Max).padding(10.dp)){
         Column(modifier = Modifier.weight(1.0f)) {
             EditorHeadline(text = name.value.format("??"), fontSize = huge)

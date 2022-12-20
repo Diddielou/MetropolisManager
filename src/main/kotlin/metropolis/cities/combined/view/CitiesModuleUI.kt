@@ -2,6 +2,7 @@ package metropolis.cities.combined.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
@@ -38,13 +39,13 @@ fun CitiesModuleUi(state: CitiesModuleState) {
                 CityExplorerUI(
                     state = explorerController.state,
                     dataProvider = { getData(it) },
-                    idProvider = { it.id },
-                    trigger = { triggerAction(it) }
+                    idProvider   = { it.id },
+                    trigger      = { triggerAction(it) },
+                    modifier     = Modifier
                 )
             }
         },
         editor = {
-
             CityEditorUi(
                 state = editorController.state,
                 trigger = { editorController.triggerAction(it) }

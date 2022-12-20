@@ -2,6 +2,7 @@ package metropolis.countries.combined.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
@@ -39,7 +40,8 @@ fun CountriesModuleUi(state: CountriesModuleState) {
                     state = explorerController.state,
                     dataProvider = { getData(it) },
                     idProvider = { it.id },
-                    trigger = { triggerAction(it) }
+                    trigger = { triggerAction(it) },
+                    modifier = Modifier
                 )
             }
         },

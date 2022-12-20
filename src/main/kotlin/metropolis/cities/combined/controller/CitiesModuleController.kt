@@ -20,13 +20,13 @@ class CitiesModuleController(
         CitiesModuleState(
             title = "Cities Module Demo",
             cityLazyTableController = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) }),
-            cityEditorController = cityEditorController(selectedCityId!!, crudRepository, onEditorAction = { reloadTable() })
+            cityEditorController = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadTable() })
         )
     )
 
     private fun showCityInEditor(id: Int){
         selectedCityId = id
-        state = state.copy(cityEditorController = cityEditorController(selectedCityId!!, crudRepository, onEditorAction = { reloadTable() }))
+        state = state.copy(cityEditorController = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadTable() }))
     }
 
     private fun reloadTable(){

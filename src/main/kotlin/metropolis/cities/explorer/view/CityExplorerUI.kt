@@ -32,22 +32,23 @@ fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
             position = WindowPosition(Alignment.Center)
         )
     ) {
-        CityExplorerUI(state, dataProvider, idProvider, trigger)
+        CityExplorerUI(state, dataProvider, idProvider, trigger, Modifier.fillMaxSize())
     }
 }
 
 @Composable
-fun CityExplorerUI(state       : TableState<City>,
-                      dataProvider: (Int) -> City,
-                      idProvider  : (City) -> Int,
-                      trigger     : (LazyTableAction) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()
+fun CityExplorerUI(state        : TableState<City>,
+                   dataProvider : (Int) -> City,
+                   idProvider   : (City) -> Int,
+                   trigger      : (LazyTableAction) -> Unit,
+                   modifier     : Modifier) {
+    Column(modifier = modifier
         .background(Color(0xFFEEEEEE))
         .padding(10.dp)) {
-        Table(tableState   = state,
+        Table(tableState = state,
             itemProvider = dataProvider,
             idProvider   = idProvider,
             trigger      = trigger,
-            modifier     = Modifier.weight(1.0f))
+            modifier     = modifier) //Modifier.weight(1.0f)
     }
 }

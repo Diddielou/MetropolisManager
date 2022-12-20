@@ -30,22 +30,23 @@ fun ApplicationScope.CountryExplorerWindow(state       : TableState<Country>,
                                                 position = WindowPosition(Alignment.Center)
         )
     ) {
-        CountryExplorerUI(state, dataProvider, idProvider, trigger)
+        CountryExplorerUI(state, dataProvider, idProvider, trigger, Modifier.fillMaxSize())
     }
 }
 
 @Composable
-fun CountryExplorerUI(state       : TableState<Country>,
-                      dataProvider: (Int) -> Country,
-                      idProvider  : (Country) -> Int,
-                      trigger     : (LazyTableAction) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()
+fun CountryExplorerUI(state        : TableState<Country>,
+                      dataProvider : (Int) -> Country,
+                      idProvider   : (Country) -> Int,
+                      trigger      : (LazyTableAction) -> Unit,
+                      modifier     : Modifier) {
+    Column(modifier = modifier
         .background(Color(0xFFEEEEEE))
         .padding(10.dp)) {
-        Table(tableState   = state,
+        Table(tableState = state,
             itemProvider = dataProvider,
             idProvider   = idProvider,
             trigger      = trigger,
-            modifier     = Modifier.weight(1.0f))
+            modifier     = modifier) //Modifier.weight(1.0f))
     }
 }

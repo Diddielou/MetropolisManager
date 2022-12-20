@@ -258,12 +258,12 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
     val elevation = 2.dp
 
     Column {
-        TopAppBar(backgroundColor = MaterialTheme.colors.surface, // Color(0xFFFAFAFA)
+        TopAppBar(backgroundColor = MaterialTheme.colors.surface,
             contentPadding = PaddingValues(start = 8.dp, end = 4.dp)
         ){
             toolbar()
         }
-        Row(modifier = Modifier.fillMaxSize().padding(padding),
+        Row(modifier = Modifier.fillMaxWidth().padding(padding), // fillMaxSize(), .fillMaxWidth()
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.Top){
             Card(elevation = elevation,

@@ -7,4 +7,4 @@ import metropolis.xtracted.controller.lazyloading.LazyTableController
 data class CountriesModuleState(
     val title: String,
     val countryLazyTableController: LazyTableController<Country>,
-    val countryEditorController: EditorController<Country>,)
+    val countryEditorController: EditorController<Country>)

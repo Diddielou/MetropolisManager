@@ -136,7 +136,7 @@ fun <T> Table(tableState  : TableState<T>,
 
             val indent = 60.dp.value + columns.filter { it.fixed && it.width != Dp.Unspecified }.sumOf { it.width.value.toDouble()}
             HorizontalScrollbar(modifier = Modifier.height(scrollBarWidth)
-                                                   .fillMaxWidth()
+                                                   //.fillMaxWidth()
                                                    .background(tableBackground)
                                                    .align(Alignment.BottomCenter)
                                                    .padding(start = indent.dp, end = scrollBarWidth, bottom = 3.dp, top = 3.dp),
