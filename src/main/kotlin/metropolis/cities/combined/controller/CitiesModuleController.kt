@@ -8,6 +8,7 @@ import metropolis.cities.editor.controller.cityEditorController
 import metropolis.cities.explorer.controller.cityLazyTableController
 import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
+import metropolis.xtracted.controller.masterDetail.MasterDetailController
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 
@@ -16,27 +17,16 @@ class CitiesModuleController(
     private val lazyRepository : LazyRepository<City>,
     private val crudRepository : CrudRepository<City>) {
 
-    var state by mutableStateOf(
-        CitiesModuleState(
-            title = "Cities Module Demo",
-            cityLazyTableController = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) }),
-            cityEditorController = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadTable() })
-        )
-    )
+    var cityLazyTableController = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) })
+    var cityEditorController = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadTable() })
 
-    private fun showCityInEditor(id: Int){
-        selectedCityId = id
-        state = state.copy(cityEditorController = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadTable() }))
+    val controller = MasterDetailController("Cities MasterDetail", selectedCityId, cityLazyTableController, cityEditorController)
+
+    fun showCityInEditor(id: Int){
+        // TODO: controller.triggerAction(Open....)
     }
 
-    private fun reloadTable(){
-        println("reloadTable executed")
-        state = state.copy(cityLazyTableController = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) }),)
-        setSelectedCityId()
+    fun reloadTable(){
+        // TODO: controller.triggerActionReload
     }
-
-    private fun setSelectedCityId(){
-        state.cityLazyTableController.triggerAction(LazyTableAction.Select(selectedCityId))
-    }
-
 }

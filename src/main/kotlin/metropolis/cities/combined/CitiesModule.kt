@@ -6,6 +6,7 @@ import metropolis.cities.combined.controller.CitiesModuleController
 import metropolis.cities.combined.view.CitiesModuleWindow
 import metropolis.cities.shared.repository.cityCrudRepository
 import metropolis.cities.shared.repository.cityLazyTableRepository
+import metropolis.xtracted.controller.masterDetail.MasterDetailController
 import metropolis.xtracted.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
@@ -20,10 +21,10 @@ fun main() {
     val cityLazyRepository = cityLazyTableRepository(url)
     val cityCrudRepository = cityCrudRepository(url)
     val controller = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
-    application {
-        controller.state.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
-        controller.state.cityEditorController.initializeUiScope(rememberCoroutineScope())
 
-        CitiesModuleWindow(state = controller.state)
+    application {
+        // TODO: MasterDetailAction initializeUiSCopes
+
+        //CitiesModuleWindow(state = controller.state)
     }
 }

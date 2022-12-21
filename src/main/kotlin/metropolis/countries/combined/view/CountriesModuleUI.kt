@@ -33,7 +33,9 @@ fun CountriesModuleUi(state: CountriesModuleState) {
     val explorerController = state.countryLazyTableController
 
     MasterDetail(
-        toolbar = { TopBar(state = state) },
+        toolbar = { TopBar(title = state.title,
+                    addOnClick = {},
+                    deleteOnClick = {}) }, // TODO button onClicks
         explorer = {
             with(explorerController) {
                 CountryExplorerUI(
