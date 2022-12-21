@@ -26,15 +26,15 @@ fun main() {
 
     application {
         val countriesModuleState = controller.state.countriesModuleController.state
-        val citiesModuleState = controller.state.citiesModuleController.state
+        //val citiesModuleState = controller.state.citiesModuleController.state // TODO state not accessible anymore
 
+        // TODO access Action (initialize all Scopes)
         countriesModuleState.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
         countriesModuleState.countryEditorController.initializeUiScope(rememberCoroutineScope())
+        //citiesModuleState.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
+        //citiesModuleState.cityEditorController.initializeUiScope(rememberCoroutineScope())
 
-        citiesModuleState.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
-        citiesModuleState.cityEditorController.initializeUiScope(rememberCoroutineScope())
-
-        MetropolisWindow(controller.state)
+        //MetropolisWindow(controller.state)
     }
 
 }
