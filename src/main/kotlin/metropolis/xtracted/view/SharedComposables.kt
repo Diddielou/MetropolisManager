@@ -280,19 +280,14 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
 }
 
 @Composable
-fun TopBar(state: CitiesModuleState){
-    with(state){
-        AlignLeftRight() {
-            Welcome(text = state.title, modifier = Modifier)
+fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){
+    AlignLeftRight() {
+        Welcome(text = title, modifier = Modifier)
+        Button(onClick = addOnClick){
+            Text("Add")
         }
-    }
-}
-
-@Composable
-fun TopBar(state: CountriesModuleState){
-    with(state){
-        AlignLeftRight() {
-            Welcome(text = state.title, modifier = Modifier)
+        Button(onClick = deleteOnClick){
+            Text("Delete")
         }
     }
 }
