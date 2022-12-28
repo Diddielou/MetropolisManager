@@ -11,11 +11,14 @@ import androidx.compose.ui.window.rememberWindowState
 import metropolis.cities.combined.model.CitiesModuleState
 import metropolis.cities.editor.view.CityEditorUi
 import metropolis.cities.explorer.view.CityExplorerUI
+import metropolis.cities.shared.data.City
+import metropolis.xtracted.controller.masterDetail.MasterDetailAction
+import metropolis.xtracted.model.MasterDetailState
 import metropolis.xtracted.view.MasterDetail
-import metropolis.xtracted.view.TopBar
+import metropolis.xtracted.view.MasterDetailTopBar
 
 @Composable
-fun ApplicationScope.CitiesModuleWindow(state: CitiesModuleState) {
+fun ApplicationScope.CitiesModuleWindow(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {
     Window(title          = state.title,
         onCloseRequest = { exitApplication() },
         state          = rememberWindowState(width    = 1000.dp,
@@ -23,17 +26,17 @@ fun ApplicationScope.CitiesModuleWindow(state: CitiesModuleState) {
                                              position = WindowPosition(Alignment.Center)
         )
     ) {
-        CitiesModuleUi(state)
+        CitiesModuleUi(state, trigger)
     }
 }
 
 @Composable
-fun CitiesModuleUi(state: CitiesModuleState) {
-    val editorController = state.cityEditorController
-    val explorerController = state.cityLazyTableController
+fun CitiesModuleUi(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {
+    val editorController = state.editorController
+    val explorerController = state.lazyTableController
 
     MasterDetail(
-        toolbar = { TopBar(title = state.title, addOnClick = { }, deleteOnClick = { }) }, // TODO button onClicks
+        toolbar = { MasterDetailTopBar(state.selectedId, title = state.title, trigger = trigger) },
         explorer = {
             with(explorerController) {
                 CityExplorerUI(

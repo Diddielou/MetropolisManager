@@ -7,11 +7,12 @@ class CrudRepository<D: Identifiable>(private val url        : String,
                                       private val table      : String,
                                       private val idColumn   : DbColumn,
                                       private val dataColumns: Map<DbColumn, (D) -> String?>, //maps DbColumn to cell value of data
-                                      private val mapper     : ResultSet.() -> D) {
+                                      private val mapper     : ResultSet.() -> D,
+                                      private val addStmt    : String) {
 
     fun createKey() : Int =
         insertAndCreateKey(url        = url,
-                           insertStmt = """INSERT INTO $table DEFAULT VALUES """.trimMargin())
+                           insertStmt = """INSERT INTO $table VALUES $addStmt""".trimMargin())
 
     fun read(id: Int) : D?  =
         readFirst(url     = url,
@@ -35,14 +36,16 @@ class CrudRepository<D: Identifiable>(private val url        : String,
                table        = table,
                id           = data.id,
                setStatement = """SET $valueUpdates """,
-               idName = "$idColumn"
+               idName       = "$idColumn"
             )
 
     }
 
     fun delete(id: Int) =
-        delete(url   = url,
-               table = table,
-               id    = id)
+        delete(url    = url,
+               table  = table,
+               id     = id,
+               idName = "$idColumn"
+            )
 
 }

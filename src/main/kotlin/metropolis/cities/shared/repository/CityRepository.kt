@@ -6,6 +6,7 @@ import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.cities.shared.repository.CityColumn.*
 import metropolis.xtracted.repository.asSql
+import java.time.LocalDate
 
 private const val TABLE = "CITY"
 enum class CityColumn : DbColumn {
@@ -105,7 +106,8 @@ fun cityCrudRepository(url: String) =
             alternateNames  = getString(ALTERNATE_NAMES.name),
             countryCode     = getString(COUNTRY_CODE.name),
             population      = getInt(POPULATION.name)
-        )}
+        )},
+        addStmt = "(-999,'',null,null,0.0,0.0,'','','',null,null,null,null,null,0,null,0,''," + LocalDate.now() + ")"
             /*
             asciiName = getString(ASCII_NAME.name),
             latitude = getDouble(LATITUDE.name),

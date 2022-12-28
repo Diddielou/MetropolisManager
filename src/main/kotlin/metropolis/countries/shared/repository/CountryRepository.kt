@@ -6,6 +6,7 @@ import metropolis.countries.shared.repository.CountryColumn.*
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.asSql
+import java.time.LocalDate
 
 private const val TABLE = "COUNTRY"
 enum class CountryColumn : DbColumn {
@@ -94,7 +95,8 @@ fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
             capital      = getString(CAPITAL.name),
             areaSqm      = getDouble(AREA_IN_SQKM.name),
             population   = getInt(POPULATION.name)
-        )}
+        )},
+        addStmt = "('','',0,'','','',0.0,0,'','','','','','','','',0'','')"
         /*
         continent    = getString(CONTINENT.name),
         isoAlpha2    = getString(ISO_ALPHA2.name),

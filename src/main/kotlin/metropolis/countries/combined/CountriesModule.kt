@@ -25,7 +25,7 @@ fun main() {
         controller.state.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
         controller.state.countryEditorController.initializeUiScope(rememberCoroutineScope())
 
-        CountriesModuleWindow(state = controller.state)
+        CountriesModuleWindow(state = controller.state, trigger = {}) // TODO
     }
 
 }

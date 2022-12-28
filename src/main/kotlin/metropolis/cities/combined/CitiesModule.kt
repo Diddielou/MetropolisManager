@@ -1,6 +1,5 @@
 package metropolis.cities.combined
 
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cities.combined.controller.CitiesModuleController
 import metropolis.cities.combined.view.CitiesModuleWindow
@@ -20,11 +19,11 @@ fun main() {
     val url = "/data/metropolisDB".urlFromResources()
     val cityLazyRepository = cityLazyTableRepository(url)
     val cityCrudRepository = cityCrudRepository(url)
-    val controller = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
+    val module = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
 
     application {
         // TODO: MasterDetailAction initializeUiSCopes
-
-        //CitiesModuleWindow(state = controller.state)
+        module.controller.initializeUiScopes()
+        CitiesModuleWindow(state = module.controller.state, trigger = { module.controller.executeAction(it) })
     }
 }

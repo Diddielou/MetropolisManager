@@ -131,10 +131,10 @@ fun insertAndCreateKey(url: String, insertStmt: String): Int =
             return keys.getInt(1)
         }
 
-fun delete(url: String, table: String, id: Int): Unit =
+fun delete(url: String, table: String, id: Int, idName: String = "ID"): Unit =
     DriverManager.getConnection(url)
         .use {
-            val sql = "DELETE FROM $table WHERE ID = $id"
+            val sql = "DELETE FROM $table WHERE $idName = $id"
 
             it.createStatement()
                 .execute(sql)

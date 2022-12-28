@@ -61,13 +61,14 @@ private fun Header(state: EditorState<City>) {
 
     val huge       = 42.sp
     val large      = 18.sp
-    val small      = 12.sp
 
     Row(modifier = Modifier.height(IntrinsicSize.Max).padding(10.dp)){
         Column(modifier = Modifier.weight(1.0f)) {
-            EditorHeadline(text = "${name.value.format("??")}, ${country.value}", fontSize = huge)
+            val comma = if(name.valueAsText.isEmpty()) "" else ", "
+
+            EditorHeadline(text = "${name.value.format("??")}$comma${country.value}", fontSize = huge)
             VSpace(10.dp)
-            EditorHeadline(text = population.valueAsText, fontSize = large)
+            EditorHeadline(text = "${population.id.translate(state.locale)}: ${population.valueAsText}", fontSize = large)
             /*
             EditorHeadline(text = "${name.value.format("??")}, ${country.value}", fontSize = huge)
             VSpace(10.dp)

@@ -37,8 +37,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import metropolis.cities.combined.model.CitiesModuleState
-import metropolis.countries.combined.model.CountriesModuleState
+import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 
 
 @Composable
@@ -280,7 +279,7 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
 }
 
 @Composable
-fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){
+fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ // TODO delete
     AlignLeftRight() {
         Welcome(text = title, modifier = Modifier)
         Button(onClick = addOnClick){
@@ -289,6 +288,15 @@ fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){
         Button(onClick = deleteOnClick){
             Text("Delete")
         }
+    }
+}
+
+@Composable
+fun MasterDetailTopBar(selected: Int, title: String, trigger: (MasterDetailAction) -> Unit){
+    AlignLeftRight() {
+        Welcome(text = title, modifier = Modifier)
+        ActionButton(trigger = trigger, action = MasterDetailAction.Add())
+        ActionButton(trigger = trigger, action = MasterDetailAction.Delete(selected))
     }
 }
 
