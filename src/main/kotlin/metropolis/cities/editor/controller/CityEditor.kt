@@ -48,7 +48,7 @@ fun cityEditorController(id: Int, repository: CrudRepository<City>, onEditorActi
                 value = city.countryCode,
                 required = true,
                 semanticValidator = { when {
-                    it == null      -> ValidationResult(true, null)
+                    it == null      -> ValidationResult(false, null)
                     it.length > 2   -> ValidationResult(false, Message.TOO_LONG)
                     it.length < 2   -> ValidationResult(false, Message.TOO_SHORT)
                     else            -> ValidationResult(true, null)
@@ -58,11 +58,8 @@ fun cityEditorController(id: Int, repository: CrudRepository<City>, onEditorActi
                 value = city.population,
                 required = true,
                 semanticValidator = { when {
-                    /* // TODO Katrin
-                    it == null -> ValidationResult(true,  null)
-                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
-                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
-                     */
+                    it == null -> ValidationResult(false,  null)
+                    it < 500   -> ValidationResult(false, Message.TOO_LOW)
                     else       -> ValidationResult(true,  null)
                 } })
             ),

@@ -45,29 +45,12 @@ fun countryEditorController(id: Int, repository: CrudRepository<Country>, onEdit
                 id                = Id.AREA_SQM,
                 value             = country.areaSqm,
                 required          = true,
-                unit              = "km²",
-                semanticValidator = { when {
-                    /* // TODO Katrin
-                    it == null -> ValidationResult(true,  null)
-                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
-                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
-                     */
-                    else       -> ValidationResult(true,  null)
-                } })
+                unit              = "km²")
             ),
-
             (intAttribute(
                 id       = Id.POPULATION,
                 value    = country.population,
-                required = true,
-                semanticValidator = { when {
-                    /* // TODO Katrin
-                    it == null -> ValidationResult(true,  null)
-                    it < 200   -> ValidationResult(false, Message.TOO_LOW)
-                    it > 5000  -> ValidationResult(false, Message.TOO_HIGH)
-                     */
-                    else       -> ValidationResult(true,  null)
-                } })
+                required = true)
             ),
 
             /*
