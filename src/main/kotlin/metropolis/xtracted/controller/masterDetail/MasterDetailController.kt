@@ -2,13 +2,17 @@ package metropolis.xtracted.controller.masterDetail
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import metropolis.cities.editor.controller.cityEditorController
 import metropolis.cities.explorer.controller.cityLazyTableController
+import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.ControllerBase
 import metropolis.xtracted.controller.editor.EditorController
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
 import metropolis.xtracted.controller.lazyloading.LazyTableController
 import metropolis.xtracted.model.MasterDetailState
+import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.Identifiable
+import metropolis.xtracted.repository.LazyRepository
 
 class MasterDetailController<D: Identifiable>(
     var title : String,
@@ -25,7 +29,7 @@ class MasterDetailController<D: Identifiable>(
 
     override fun executeAction(action: MasterDetailAction) : MasterDetailState<D> = when (action) {
         // TODO make generic
-        //is MasterDetailAction.Open -> showElementInEditor(action.id, action.editor)
+        // is MasterDetailAction.Open -> showElementInEditor(action.id, action.editor)
         //is MasterDetailAction.Reload -> reloadTable(action.explorer)
         is MasterDetailAction.Add -> add()
         is MasterDetailAction.Delete -> delete(action.id)
@@ -34,11 +38,9 @@ class MasterDetailController<D: Identifiable>(
     // TODO New item not seen in table as long as not saved
     private fun add() : MasterDetailState<D> {
         val newId = state.editorController.repository.createKey()
-        selectedId = newId
         reloadTable(lazyTableController = initialLazyTableController)
         showElementInEditor(newId, initialEditorController)
         setSelectedInExplorer()
-
         //val newState =  state.copy(selectedId = newId, lazyTableController = state.lazyTableController, editorController = state.editorController)
         return state
     }

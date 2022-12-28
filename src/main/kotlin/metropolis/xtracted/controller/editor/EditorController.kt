@@ -52,6 +52,11 @@ class EditorController<D: Identifiable>(val id: Int,
         return nextEditorState
     }
 
+    fun create() : EditorState<D> {
+        val newId = repository.createKey()
+        return reload()
+    }
+
     private fun reload() =
         state.copy(attributes = asAttributeList(repository.read(id)!!), undoState = UndoState())
 

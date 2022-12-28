@@ -107,7 +107,7 @@ fun cityCrudRepository(url: String) =
             countryCode     = getString(COUNTRY_CODE.name),
             population      = getInt(POPULATION.name)
         )},
-        addStmt = "(-999,'',null,null,0.0,0.0,'','','',null,null,null,null,null,0,null,0,''," + LocalDate.now() + ")"
+        addStmt = "(${NAME}, ${LATITUDE}, ${LONGITUDE}, ${FEATURE_CLASS}, ${FEATURE_CODE}, ${COUNTRY_CODE}, ${POPULATION}, ${DEM}, ${TIMEZONE}, ${MODIFICATION_DATE}) VALUES ('',0.0,0.0,'','','',0,0,''," + LocalDate.now() + ")"
             /*
             asciiName = getString(ASCII_NAME.name),
             latitude = getDouble(LATITUDE.name),
@@ -120,6 +120,9 @@ fun cityCrudRepository(url: String) =
             masl = getInt(DEM.name),
             timeZone = getString(TIMEZONE.name),
             modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name)))
+
+            addStmt = "| ($NAME, $LATITUDE, $LONGITUTDE, $FEATURE_CLASS, $FEATURE_CODE, $COUNTRY_CODE, $POPULATION, $DEM, $TIMEZONE, MODIFICATION_DATE"+
+                   "| VALUES ('',0.0,0.0,'','','',0,0,''," + LocalDate.now() + ")"
              */
     )
 /*

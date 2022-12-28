@@ -96,7 +96,8 @@ fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
             areaSqm      = getDouble(AREA_IN_SQKM.name),
             population   = getInt(POPULATION.name)
         )},
-        addStmt = "('','',0,'','','',0.0,0,'','','','','','','','',0'','')"
+        addStmt = "(${ISO_ALPHA2}, ${ISO_ALPHA3}, ${NAME}, ${AREA_IN_SQKM}, ${POPULATION}, ${CONTINENT}, ${GEONAME_ID}) VALUES ('','','',0.0,0,'',0)"
+        //addStmt = "('','',-999,null,'',null,0.0,0,'',null,null,null,null,null,null,null,0,null,null)"
         /*
         continent    = getString(CONTINENT.name),
         isoAlpha2    = getString(ISO_ALPHA2.name),
@@ -104,6 +105,7 @@ fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
         currencyCode = getString(CURRENCY_CODE.name),
         languages    = getString(LANGUAGES.name),
         neighbours   = getString(NEIGHBOURS.name))
+
          */
     )
 

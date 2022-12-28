@@ -12,10 +12,10 @@ class CitiesModuleController(
     private val lazyRepository : LazyRepository<City>,
     private val crudRepository : CrudRepository<City>) {
 
-    private var cityLazyTableController = cityLazyTableController(
+    private val cityLazyTableController = cityLazyTableController(
                                                                 lazyRepository,
                                                                 onSelectionChange = { showCityInEditor(it) })
-    private var cityEditorController = cityEditorController(
+    private val cityEditorController = cityEditorController(
                                                                 initiallySelectedCityId,
                                                                 crudRepository,
                                                                 onEditorAction = { reloadCityExplorer() })
@@ -24,7 +24,7 @@ class CitiesModuleController(
         title                      = "Cities MasterDetail",
         selectedId                 = initiallySelectedCityId,
         initialLazyTableController = cityLazyTableController,
-        initialEditorController    =  cityEditorController)
+        initialEditorController    = cityEditorController)
 
     private fun showCityInEditor(id: Int){
         //controller.executeAction(MasterDetailAction.Open(id, editor = cityEditorController(selectedCityId, crudRepository, onEditorAction = { reloadCityExplorer() })))

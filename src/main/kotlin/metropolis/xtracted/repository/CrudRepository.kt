@@ -12,7 +12,7 @@ class CrudRepository<D: Identifiable>(private val url        : String,
 
     fun createKey() : Int =
         insertAndCreateKey(url        = url,
-                           insertStmt = """INSERT INTO $table VALUES $addStmt""".trimMargin())
+                           insertStmt = """INSERT INTO $table $addStmt""".trimMargin())
 
     fun read(id: Int) : D?  =
         readFirst(url     = url,
@@ -30,22 +30,20 @@ class CrudRepository<D: Identifiable>(private val url        : String,
             if(index < dataColumns.size - 1){
                 valueUpdates.append(", ")
             }
-
         }
         update(url          = url,
                table        = table,
                id           = data.id,
                setStatement = """SET $valueUpdates """,
-               idName       = "$idColumn"
+               idName       = idColumn.name
             )
-
     }
 
     fun delete(id: Int) =
         delete(url    = url,
                table  = table,
                id     = id,
-               idName = "$idColumn"
+               idName = idColumn.name
             )
 
 }
