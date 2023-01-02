@@ -9,10 +9,7 @@ import androidx.compose.ui.focus.FocusRequester
 import metropolis.xtracted.controller.ControllerBase
 import metropolis.xtracted.controller.LRUCache
 import metropolis.xtracted.controller.Scheduler
-import metropolis.xtracted.data.Filter
-import metropolis.xtracted.data.SortDirection
-import metropolis.xtracted.data.SortDirective
-import metropolis.xtracted.data.UNORDERED
+import metropolis.xtracted.data.*
 import metropolis.xtracted.model.TableColumn
 import metropolis.xtracted.model.TableState
 import metropolis.xtracted.repository.LazyRepository
@@ -57,6 +54,9 @@ class LazyTableController<T>(title                  : String,
             }
             defaultItem
         }
+
+    fun searchFor(text: String, column: DbColumn) : T? =
+        repository.readSpecific(text, column)
 
     override fun executeAction(action: LazyTableAction) : TableState<T> =
         when (action) {
@@ -157,5 +157,7 @@ class LazyTableController<T>(title                  : String,
     private fun recompose() {
         state = state.copy(triggerRecompose = !state.triggerRecompose)
     }
+
+
 }
 

@@ -36,6 +36,7 @@ fun countryLazyTableRepository(url: String) =
         table       = TABLE,
         dataColumns = listOf(
             ISO_NUMERIC,
+            ISO_ALPHA2,
             NAME,
             CAPITAL,
             AREA_IN_SQKM,
@@ -45,6 +46,7 @@ fun countryLazyTableRepository(url: String) =
         mapper      = {
             Country(
                 id           = getInt(ISO_NUMERIC.name),
+                isoAlpha2    = getString(ISO_ALPHA2.name),
                 name         = getString(NAME.name),
                 capital      = getString(CAPITAL.name),
                 areaSqm      = getDouble(AREA_IN_SQKM.name),
@@ -58,12 +60,14 @@ fun countryCrudRepository(url: String) =
         idColumn = ISO_NUMERIC,
         dataColumns = mapOf(
             NAME            to { it.name.asSql() },
+            ISO_ALPHA2      to { it.isoAlpha2.asSql() },
             CAPITAL         to { it.capital?.asSql() },
             AREA_IN_SQKM    to { it.areaSqm.toString().asSql() },
             POPULATION      to { it.population.toString().asSql() }
         ),
         mapper = { Country(
             id           = getInt(ISO_NUMERIC.name),
+            isoAlpha2    = getString(ISO_ALPHA2.name),
             name         = getString(NAME.name),
             capital      = getString(CAPITAL.name),
             areaSqm      = getDouble(AREA_IN_SQKM.name),

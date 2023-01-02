@@ -11,26 +11,24 @@ import metropolis.xtracted.repository.Identifiable
 
 class MasterDetailController<D: Identifiable>(
     var title : String,
-    private var selectedId : Int?,
-    private var initialLazyTableController: LazyTableController<D>,
-    private var initialEditorController: EditorController<D>,
+    private var selectedId : Int,
     val onNewTableController : () -> LazyTableController<D>,
     val onNewEditorController : (Int) -> EditorController<D>) :
 
     ControllerBase<MasterDetailState<D>, MasterDetailAction>(
         initialState = MasterDetailState(
             title = title,
-            selectedId = selectedId!!,
-            lazyTableController = initialLazyTableController,
-            editorController = initialEditorController)) {
+            selectedId = selectedId,
+            lazyTableController = onNewTableController(),
+            editorController = onNewEditorController(selectedId))) {
 
     init {
-        setSelectedInExplorer()
+        setSelectedInExplorer(null)
         // was not automatically selected in explorer on initialization
     }
 
     override fun executeAction(action: MasterDetailAction) : MasterDetailState<D> = when (action) {
-        is MasterDetailAction.SetSelected -> setSelectedInExplorer()
+        is MasterDetailAction.SetSelected -> setSelectedInExplorer(action.id)
         is MasterDetailAction.Open<*> -> showElementInEditor(action.id, action.editor as EditorController<D>)
         is MasterDetailAction.Reload<*> -> reloadTable(action.explorer as LazyTableController<D>)
         is MasterDetailAction.Add -> add()
@@ -46,7 +44,7 @@ class MasterDetailController<D: Identifiable>(
         val newId = state.editorController.repository.createKey()
         reloadTable(lazyTableController = onNewTableController())
         showElementInEditor(newId, onNewEditorController(newId))
-        setSelectedInExplorer()
+        setSelectedInExplorer(null)
         // doesn't work (yet) from this Controller:
         // state.lazyTableController.executeAction(LazyTableAction.SetFilter(column = ))
         return state
@@ -64,8 +62,12 @@ class MasterDetailController<D: Identifiable>(
         }
     }
 
-    private fun setSelectedInExplorer() : MasterDetailState<D> {
-        state.lazyTableController.triggerAction(LazyTableAction.Select(selectedId!!))
+    private fun setSelectedInExplorer(id: Int?) : MasterDetailState<D> {
+        if(id != null){
+            state.lazyTableController.triggerAction(LazyTableAction.Select(id))
+        } else {
+            state.lazyTableController.triggerAction(LazyTableAction.Select(selectedId))
+        }
         return state
     }
     private fun showElementInEditor(id: Int, editorController: EditorController<D>) : MasterDetailState<D> {

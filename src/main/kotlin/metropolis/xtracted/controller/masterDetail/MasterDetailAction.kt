@@ -18,10 +18,8 @@ sealed class MasterDetailAction(
     override val icon    : ImageVector? = null,
     override val enabled : Boolean) : Action {
 
-        class SetSelected()       : MasterDetailAction("SetSelected", null, true)
-        // TODO: how to make generic?
-        // Hier gelang es mir nur halbwegs, Klassen zu erstellen, die generische Argumente entgegennehmen für die EditorController LazyTableController.
-        // Auf Google/Stackoverflow fand ich nichts und das überstieg mein Wissen über Generics...
+        class SetSelected(val id: Int?)       : MasterDetailAction("SetSelected", null, true)
+        // Nicht sicher, ob das der korrekte Weg ist, Klassen zu erstellen, die generische Argumente entgegennehmen für die EditorController LazyTableController.
         // Lösung momentan: direkter Cast nach EditorController<D> im MasterDetailController.
         class Open<D : Identifiable>(val id: Int, val editor: EditorController<D>)     : MasterDetailAction("Open", Icons.Filled.OpenInNew, true)
         class Reload<D : Identifiable>(val explorer: LazyTableController<D>)           : MasterDetailAction("Reload", Icons.Filled.Sync, true)

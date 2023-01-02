@@ -19,7 +19,12 @@ fun main() {
     val url = "/data/metropolisDB".urlFromResources()
     val countryLazyRepository = countryLazyTableRepository(url)
     val countryCrudRepository = countryCrudRepository(url)
-    val module = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
+    val module = CountriesModuleController(
+        initiallySelectedCountryId,
+        countryLazyRepository,
+        countryCrudRepository,
+        onCountrySelection = { println( "Country: $it selected!") }
+    )
 
     application {
         module.controller.initializeUiScopes() // must be run here because it is a Composable

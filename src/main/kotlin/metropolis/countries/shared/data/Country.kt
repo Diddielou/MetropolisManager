@@ -3,6 +3,7 @@ package metropolis.countries.shared.data
 import metropolis.xtracted.repository.Identifiable
 
 data class Country(override val id  : Int, // isoNumeric
+                   val isoAlpha2   : String,
                    val name        : String,
                    val capital     : String? = null,
                    val areaSqm     : Double,

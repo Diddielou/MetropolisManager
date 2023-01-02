@@ -16,10 +16,17 @@ private const val ELLIPSES = "..."
 fun countryLazyTableController(repository: LazyRepository<Country>, onSelectionChange: (Int) -> Unit = {}) =
     LazyTableController(title       = "Countries of the world",
         repository  = repository,
-        defaultItem = Country(-999, ELLIPSES, ELLIPSES, 0.0, 0),
+        defaultItem = Country(-999, "", ELLIPSES, ELLIPSES, 0.0, 0),
         columns     = listOf(
+            StringColumn(header = "CC",
+                width         = 50.dp,
+                alignment     = Alignment.CenterStart,
+                fixed         = true,
+                dbColumn      = CountryColumn.ISO_ALPHA2,
+                valueProvider = { it.isoAlpha2 }
+            ),
             StringColumn(header        = "Name",
-                width         = 150.dp,
+                width         = 125.dp,
                 alignment     = Alignment.CenterStart,
                 fixed         = true,
                 dbColumn      = CountryColumn.NAME,
@@ -33,15 +40,15 @@ fun countryLazyTableController(repository: LazyRepository<Country>, onSelectionC
                 valueProvider = { it.capital }
             ),
             DoubleColumn(header        = "Area (km²)",
-                width         = 100.dp,
+                width         = 75.dp,
                 alignment     = Alignment.CenterStart,
                 fixed         = false,
                 dbColumn      = CountryColumn.AREA_IN_SQKM,
                 valueProvider = { it.areaSqm },
                 formatter     = { it.format("%,.1f") }
             ),
-            IntColumn(header        = "Population",
-                width         = 100.dp,
+            IntColumn(header  = "Population",
+                width         = 75.dp,
                 alignment     = Alignment.CenterStart,
                 fixed         = false,
                 dbColumn      = CountryColumn.POPULATION,

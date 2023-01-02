@@ -15,20 +15,23 @@ fun countryEditorController(id: Int, repository: CrudRepository<Country>, onEdit
         repository = repository,
         asData = {
             Country(id      = id,
+                isoAlpha2   = it[Id.ISO_ALPHA2],
                 name        = it[Id.NAME],
                 capital     = it[Id.CAPITAL],
                 areaSqm     = it[Id.AREA_SQM],
                 population  = it[Id.POPULATION]
-                /*
-                continent   = it[Id.CONTINENT],
-                isoAlpha2 = it[Id.ISO_ALPHA2],
-                currencyName = it[Id.CURRENCY_NAME],
-                currencyCode = it[Id.CURRENCY_CODE],
-                languages = it[Id.LANGUAGES],
-                neighbours = it[Id.NEIGHBOURS]
-                 */
                 )},
         asAttributeList = { country -> listOf(
+            (stringAttribute(
+                id       = Id.ISO_ALPHA2,
+                value    = country.isoAlpha2,
+                required = true,
+                syntaxValidator = { when {
+                    it.length > 2   -> ValidationResult(false, Message.TOO_LONG)
+                    it.length < 2   -> ValidationResult(false, Message.TOO_SHORT)
+                    else            -> ValidationResult(true, null)
+                } })
+            ),
             (stringAttribute(
                 id       = Id.NAME,
                 value    = country.name,
