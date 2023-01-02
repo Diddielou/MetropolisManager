@@ -6,7 +6,6 @@ import metropolis.countries.shared.repository.CountryColumn.*
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.asSql
-import java.time.LocalDate
 
 private const val TABLE = "COUNTRY"
 enum class CountryColumn : DbColumn {
@@ -32,7 +31,6 @@ enum class CountryColumn : DbColumn {
 }
 
 fun countryLazyTableRepository(url: String) =
-
     LazyRepository(
         url         = url,
         table       = TABLE,
@@ -42,14 +40,6 @@ fun countryLazyTableRepository(url: String) =
             CAPITAL,
             AREA_IN_SQKM,
             POPULATION
-            /*
-            CONTINENT,
-            ISO_ALPHA2,
-            CURRENCY_NAME,
-            CURRENCY_CODE,
-            LANGUAGES,
-            NEIGHBOURS
-             */
         ),
         idColumn    = ISO_NUMERIC,
         mapper      = {
@@ -59,19 +49,10 @@ fun countryLazyTableRepository(url: String) =
                 capital      = getString(CAPITAL.name),
                 areaSqm      = getDouble(AREA_IN_SQKM.name),
                 population   = getInt(POPULATION.name)
-                /*
-                    continent    = getString(CONTINENT.name),
-                    isoAlpha2    = getString(ISO_ALPHA2.name),
-                    currencyName = getString(CURRENCY_NAME.name),
-                    currencyCode = getString(CURRENCY_CODE.name),
-                    languages    = getString(LANGUAGES.name),
-                    neighbours   = getString(NEIGHBOURS.name)) }
-                 */
             )
-        }
-    )
+        })
 
-fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
+fun countryCrudRepository(url: String) =
     CrudRepository(url = url,
         table = TABLE,
         idColumn = ISO_NUMERIC,
@@ -80,14 +61,6 @@ fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
             CAPITAL         to { it.capital?.asSql() },
             AREA_IN_SQKM    to { it.areaSqm.toString().asSql() },
             POPULATION      to { it.population.toString().asSql() }
-            /*
-            CONTINENT       to { it.continent.asSql() },
-            ISO_ALPHA2      to { it.isoAlpha2.asSql() },
-            CURRENCY_NAME   to { it.currencyName?.asSql() },
-            CURRENCY_CODE   to { it.currencyCode?.asSql() },
-            LANGUAGES       to { it.languages?.asSql() },
-            NEIGHBOURS      to { it.neighbours?.asSql() }
-             */
         ),
         mapper = { Country(
             id           = getInt(ISO_NUMERIC.name),
@@ -97,40 +70,29 @@ fun countryCrudRepository(url: String, onEditorAction: () -> Unit = {}) =
             population   = getInt(POPULATION.name)
         )},
         addStmt = "(${ISO_ALPHA2}, ${ISO_ALPHA3}, ${NAME}, ${AREA_IN_SQKM}, ${POPULATION}, ${CONTINENT}, ${GEONAME_ID}) VALUES ('','','',0.0,0,'',0)"
-        //addStmt = "('','',-999,null,'',null,0.0,0,'',null,null,null,null,null,null,null,0,null,null)"
-        /*
-        continent    = getString(CONTINENT.name),
-        isoAlpha2    = getString(ISO_ALPHA2.name),
-        currencyName = getString(CURRENCY_NAME.name),
-        currencyCode = getString(CURRENCY_CODE.name),
-        languages    = getString(LANGUAGES.name),
-        neighbours   = getString(NEIGHBOURS.name))
-
-         */
     )
-
 
 /*
 CREATE TABLE COUNTRY (
-                         ISO_ALPHA2           CHAR(2)          NOT NULL,
-                         ISO_ALPHA3           CHAR(3)          NOT NULL,
-                         ISO_NUMERIC          INTEGER          PRIMARY KEY AUTOINCREMENT,
-                         FIPS_CODE            VARCHAR(3),
-                         NAME                 VARCHAR(200)     NOT NULL,
-                         CAPITAL              VARCHAR(200),
-                         AREA_IN_SQKM         DOUBLE PRECISION NOT NULL,
-                         POPULATION           INTEGER          NOT NULL,
-                         CONTINENT            CHAR(2)          NOT NULL,
-                         TLD                  CHAR(3),
-                         CURRENCY_CODE        CHAR(3),
-                         CURRENCY_NAME        VARCHAR(20),
-                         PHONE                VARCHAR(10),
-                         POSTAL_CODE_FORMAT   VARCHAR(10),
-                         POSTAL_CODE_REGEX    VARCHAR(30),
-                         LANGUAGES            VARCHAR(30),
-                         GEONAME_ID           BIGINT           NOT NULL,
-                         NEIGHBOURS           VARCHAR(30),
-                         EQUIVALENT_FIPS_CODE VARCHAR(3)
+     ISO_ALPHA2           CHAR(2)          NOT NULL,
+     ISO_ALPHA3           CHAR(3)          NOT NULL,
+     ISO_NUMERIC          INTEGER          PRIMARY KEY AUTOINCREMENT,
+     FIPS_CODE            VARCHAR(3),
+     NAME                 VARCHAR(200)     NOT NULL,
+     CAPITAL              VARCHAR(200),
+     AREA_IN_SQKM         DOUBLE PRECISION NOT NULL,
+     POPULATION           INTEGER          NOT NULL,
+     CONTINENT            CHAR(2)          NOT NULL,
+     TLD                  CHAR(3),
+     CURRENCY_CODE        CHAR(3),
+     CURRENCY_NAME        VARCHAR(20),
+     PHONE                VARCHAR(10),
+     POSTAL_CODE_FORMAT   VARCHAR(10),
+     POSTAL_CODE_REGEX    VARCHAR(30),
+     LANGUAGES            VARCHAR(30),
+     GEONAME_ID           BIGINT           NOT NULL,
+     NEIGHBOURS           VARCHAR(30),
+     EQUIVALENT_FIPS_CODE VARCHAR(3)
 );
 
  */

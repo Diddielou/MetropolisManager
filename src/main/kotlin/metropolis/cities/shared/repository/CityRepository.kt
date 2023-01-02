@@ -40,20 +40,6 @@ fun cityLazyTableRepository(url: String) =
             ALTERNATE_NAMES,
             COUNTRY_CODE,
             POPULATION
-        /*
-            ASCII_NAME,
-            LATITUDE,
-            LONGITUDE,
-            FEATURE_CLASS,
-            FEATURE_CODE,
-            CC2,
-            ADMIN1_CODE,
-            ADMIN2_CODE,
-            ELEVATION,
-            DEM,
-            TIMEZONE,
-            MODIFICATION_DATE
-         */
         ),
         idColumn = ID,
         mapper = {
@@ -63,19 +49,6 @@ fun cityLazyTableRepository(url: String) =
                 alternateNames = getString(ALTERNATE_NAMES.name),
                 countryCode = getString(COUNTRY_CODE.name),
                 population = getInt(POPULATION.name)
-                /*
-                asciiName = getString(ASCII_NAME.name),
-                latitude = getDouble(LATITUDE.name),
-                longitude = getDouble(LONGITUDE.name),
-                featureClass = getString(FEATURE_CLASS.name),
-                featureCode = getString(FEATURE_CODE.name),
-                admin1Code = getString(ADMIN1_CODE.name),
-                admin2Code = getString(ADMIN2_CODE.name),
-                elevation = getInt(ELEVATION.name),
-                masl = getInt(DEM.name),
-                timeZone = getString(TIMEZONE.name),
-                modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name))
-                 */
                 )
         })
 
@@ -88,19 +61,8 @@ fun cityCrudRepository(url: String) =
             ALTERNATE_NAMES to { it.alternateNames?.asSql() },
             COUNTRY_CODE    to { it.countryCode.asSql() },
             POPULATION      to { it.population.toString().asSql() }
-            /*
-            ASCII_NAME      to { it.asciiName?.asSql() },
-            LATITUDE        to { it.latitude.toString().asSql() },
-            LONGITUDE       to { it.longitude.toString().asSql() },
-            FEATURE_CODE    to { it.featureCode.asSql() },
-            ADMIN1_CODE     to { it.admin1Code?.asSql() },
-            ADMIN2_CODE     to { it.admin2Code?.asSql() },
-            ELEVATION       to { it.elevation?.toString()?.asSql() },
-            DEM             to { it.masl.toString().asSql() },
-            TIMEZONE        to { it.timeZone.asSql() }
-            */
         ),
-        mapper = { City( // Alle Felder ausser featureClass
+        mapper = { City(
             id              = getInt(ID.name),
             name            = getString(NAME.name),
             alternateNames  = getString(ALTERNATE_NAMES.name),
@@ -108,22 +70,6 @@ fun cityCrudRepository(url: String) =
             population      = getInt(POPULATION.name)
         )},
         addStmt = "(${NAME}, ${LATITUDE}, ${LONGITUDE}, ${FEATURE_CLASS}, ${FEATURE_CODE}, ${COUNTRY_CODE}, ${POPULATION}, ${DEM}, ${TIMEZONE}, ${MODIFICATION_DATE}) VALUES ('',0.0,0.0,'','','',0,0,''," + LocalDate.now() + ")"
-            /*
-            asciiName = getString(ASCII_NAME.name),
-            latitude = getDouble(LATITUDE.name),
-            longitude = getDouble(LONGITUDE.name),
-            featureClass = "P", // TODO
-            featureCode = getString(FEATURE_CODE.name),
-            admin1Code = getString(ADMIN1_CODE.name),
-            admin2Code = getString(ADMIN2_CODE.name),
-            elevation = getInt(ELEVATION.name),
-            masl = getInt(DEM.name),
-            timeZone = getString(TIMEZONE.name),
-            modificationDate = LocalDate.parse(getString(MODIFICATION_DATE.name)))
-
-            addStmt = "| ($NAME, $LATITUDE, $LONGITUTDE, $FEATURE_CLASS, $FEATURE_CODE, $COUNTRY_CODE, $POPULATION, $DEM, $TIMEZONE, MODIFICATION_DATE"+
-                   "| VALUES ('',0.0,0.0,'','','',0,0,''," + LocalDate.now() + ")"
-             */
     )
 /*
 create table CITY

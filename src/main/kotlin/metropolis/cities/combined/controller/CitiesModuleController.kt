@@ -3,6 +3,7 @@ package metropolis.cities.combined.controller
 import metropolis.cities.editor.controller.cityEditorController
 import metropolis.cities.explorer.controller.cityLazyTableController
 import metropolis.cities.shared.data.City
+import metropolis.xtracted.controller.lazyloading.LazyTableController
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.controller.masterDetail.MasterDetailController
 import metropolis.xtracted.repository.CrudRepository
@@ -28,13 +29,11 @@ class CitiesModuleController(
         initialEditorController    = cityEditorController)
 
     private fun showCityInEditor(id: Int){
-        //controller.showElementInEditor(id = id, editorController = cityEditorController(id, crudRepository, onEditorAction = { reloadCityExplorer() }))
         controller.executeAction(MasterDetailAction.Open(id = id, editor = cityEditorController(id, crudRepository, onEditorAction = { reloadCityExplorer() })))
     }
 
     private fun reloadCityExplorer(){
         controller.executeAction(MasterDetailAction.Reload(explorer = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) })))
-        //controller.reloadTable(lazyTableController = cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) }))
-        controller.setSelectedInExplorer()
+        controller.executeAction(MasterDetailAction.SetSelected())
     }
 }
