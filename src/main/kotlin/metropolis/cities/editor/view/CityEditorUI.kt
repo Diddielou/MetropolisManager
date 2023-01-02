@@ -65,16 +65,10 @@ private fun Header(state: EditorState<City>) {
     Row(modifier = Modifier.height(IntrinsicSize.Max).padding(10.dp)){
         Column(modifier = Modifier.weight(1.0f)) {
             val comma = if(name.valueAsText.isEmpty()) "" else ", "
-
-            EditorHeadline(text = "${name.value.format("??")}$comma${country.value}", fontSize = huge)
+            val newName = if(name.value.isNullOrEmpty()) "[No name]" else name.value.format("??")
+            EditorHeadline(text = "${newName}$comma${country.value}", fontSize = huge)
             VSpace(10.dp)
             EditorHeadline(text = "${population.id.translate(state.locale)}: ${population.valueAsText}", fontSize = large)
-            /*
-            EditorHeadline(text = "${name.value.format("??")}, ${country.value}", fontSize = huge)
-            VSpace(10.dp)
-            EditorHeadline(text = masl.valueAsText, fontSize = large)
-            EditorHeadline(text = timeZone.value ?: "", fontSize = large)
-             */
         }
     }
 }

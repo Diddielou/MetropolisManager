@@ -24,9 +24,6 @@ fun main() {
         cityCrudRepository = cityCrudRepository)
 
     application {
-        controller.countriesModule.controller.initializeUiScopes()
-        controller.citiesModule.controller.initializeUiScopes()
-
         MetropolisWindow(controller.state)
     }
 

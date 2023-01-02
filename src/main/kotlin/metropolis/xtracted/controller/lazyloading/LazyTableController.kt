@@ -154,7 +154,7 @@ class LazyTableController<T>(title                  : String,
             idx < lazyListState.firstVisibleItemIndex + lazyListState.layoutInfo.visibleItemsInfo.size
         }
 
-    fun recompose() {
+    private fun recompose() {
         state = state.copy(triggerRecompose = !state.triggerRecompose)
     }
 }

@@ -24,12 +24,12 @@ fun ApplicationScope.CitiesModuleWindow(state: MasterDetailState<City>, trigger:
                                              position = WindowPosition(Alignment.Center)
         )
     ) {
-        CitiesModuleUi(state, trigger)
+        CitiesMasterDetailUi(state, trigger)
     }
 }
 
 @Composable
-fun CitiesModuleUi(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {
+fun CitiesMasterDetailUi(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {
     val editorController = state.editorController
     val explorerController = state.lazyTableController
 

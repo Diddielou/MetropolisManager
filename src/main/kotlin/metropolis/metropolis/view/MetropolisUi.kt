@@ -7,13 +7,9 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.cities.combined.view.CitiesModuleUi
-import metropolis.cities.shared.data.City
-import metropolis.countries.combined.view.CountriesModuleUi
-import metropolis.countries.shared.data.Country
+import metropolis.cities.combined.view.CitiesMasterDetailUi
+import metropolis.countries.combined.view.CountriesMasterDetailUi
 import metropolis.metropolis.data.MetropolisState
-import metropolis.xtracted.controller.editor.EditorAction
-import metropolis.xtracted.model.MasterDetailState
 import metropolis.xtracted.view.AlignLeftRight
 import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.Heading1
@@ -36,10 +32,13 @@ private fun MetropolisUi(state: MetropolisState) {
     val countryController = state.countriesModuleController.controller
     val cityController = state.citiesModuleController.controller
 
+    countryController.initializeUiScopes()
+    cityController.initializeUiScopes()
+
     MasterDetail(
         toolbar = { MetropolisTopBar(state.title) },
-        explorer = { CountriesModuleUi(state = countryController.state, trigger = { countryController.executeAction(it) }) },
-        editor = { CitiesModuleUi(state = cityController.state, trigger = { cityController.executeAction(it) }) },
+        explorer = { CountriesMasterDetailUi(state = countryController.state, trigger = { countryController.executeAction(it) }) },
+        editor = { CitiesMasterDetailUi(state = cityController.state, trigger = { cityController.executeAction(it) }) },
         weight1 = 0.5f, weight2 = 0.5f
     )
 }

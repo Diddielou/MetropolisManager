@@ -24,12 +24,12 @@ fun ApplicationScope.CountriesModuleWindow(state: MasterDetailState<Country>, tr
                                              position = WindowPosition(Alignment.Center)
         )
     ) {
-        CountriesModuleUi(state, trigger)
+        CountriesMasterDetailUi(state, trigger)
     }
 }
 
 @Composable
-fun CountriesModuleUi(state: MasterDetailState<Country>, trigger: (MasterDetailAction) -> Unit) {
+fun CountriesMasterDetailUi(state: MasterDetailState<Country>, trigger: (MasterDetailAction) -> Unit) {
     val editorController = state.editorController
     val explorerController = state.lazyTableController
 

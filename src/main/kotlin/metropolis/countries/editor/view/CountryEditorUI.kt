@@ -65,20 +65,16 @@ private fun Header(state: EditorState<Country>) {
     // im Editor-State werden die Attribute verwaltet. Diese können generisch als Formular angezeigt werden
     // der Header ist jedoch speziell, nicht generisch (oder noch nicht)
     val name            : Attribute<String>   = state[Id.NAME]
-    val capital         : Attribute<String>   = state[Id.CAPITAL]
     val areaSqm         : Attribute<Double>   = state[Id.AREA_SQM]
-    val population      : Attribute<Int>      = state[Id.POPULATION]
 
     val huge       = 42.sp
     val large      = 18.sp
 
     Row(modifier = Modifier.height(IntrinsicSize.Max).padding(10.dp)){
         Column(modifier = Modifier.weight(1.0f)) {
-            EditorHeadline(text = name.value.format("??"), fontSize = huge)
+            EditorHeadline(text = if(name.value.isNullOrEmpty()) "[No name]" else name.value.format("??"), fontSize = huge)
             VSpace(10.dp)
             EditorHeadline(text = "${areaSqm.value.pp("%,.1f", "??")} ${areaSqm.unit}", fontSize = large)
-            //EditorHeadline(text = capital.valueAsText, fontSize = large)
-            //EditorHeadline(text = population.valueAsText, fontSize = large)
         }
     }
 }
