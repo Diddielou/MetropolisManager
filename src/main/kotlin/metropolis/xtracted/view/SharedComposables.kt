@@ -258,7 +258,7 @@ fun EditorHeadline(text: String, fontSize: TextUnit){
         maxLines   = 1,
         overflow   = TextOverflow.Ellipsis,
         fontSize   = fontSize,
-        fontWeight = FontWeight.ExtraLight)
+        fontWeight = FontWeight.Normal)
 }
 
 

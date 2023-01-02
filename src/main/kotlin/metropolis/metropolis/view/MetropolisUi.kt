@@ -11,6 +11,7 @@ import metropolis.cities.combined.view.CitiesMasterDetailUi
 import metropolis.countries.combined.view.CountriesMasterDetailUi
 import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.view.AlignLeftRight
+import metropolis.xtracted.view.ExpensesAppTheme
 import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.Heading1
 
@@ -23,7 +24,9 @@ fun ApplicationScope.MetropolisWindow(state: MetropolisState) {
                                                 position = WindowPosition(Alignment.Center)
            )
     ) {
-        MetropolisUi(state = state)
+        ExpensesAppTheme(false) {
+            MetropolisUi(state = state)
+        }
     }
 }
 
