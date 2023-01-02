@@ -8,10 +8,13 @@ import metropolis.countries.shared.repository.countryLazyTableRepository
 import metropolis.metropolis.controller.MetropolisController
 import metropolis.metropolis.view.MetropolisWindow
 import metropolis.xtracted.repository.urlFromResources
+import metropolis.xtracted.repository.urlFromWorkingDirectory
 
 fun main() {
 
     val url = "/data/metropolisDB".urlFromResources()
+    //val url = "/data/metropolisDB".urlFromWorkingDirectory()
+
     val countryLazyRepository = countryLazyTableRepository(url)
     val countryCrudRepository = countryCrudRepository(url)
     val cityLazyRepository = cityLazyTableRepository(url)
