@@ -30,12 +30,12 @@ Dementsprechend besteht das Assignment aus drei Teilen
 ** Empfehlung: suchen Sie in einem Team von 2-3 Personen nach der einfachsten Lösung
 
 * _Implementierung_ von `Metropolis`
-** basierend auf den Beispielen und insbesondere den `xtracted`-Packages aus `module08` und `module09`
-** die beiden Explorer müssen LazyLoading, Sortieren und Filtern unterstützen
-** die Editoren unterstützen Mehrsprachigkeit, Input-Validierung und Undo/Redo
-** das ist eine Einzelarbeit
+** basierend auf den Beispielen und insbesondere den `xtracted`-Packages aus `module08` und `module09` ✔
+** die beiden Explorer müssen LazyLoading, Sortieren und Filtern unterstützen ✔
+** die Editoren unterstützen Mehrsprachigkeit, Input-Validierung und Undo/Redo ✔
+** das ist eine Einzelarbeit ✔
 
-* _Entwurf_ der _nächsten_ Applikations-Version. mit K. Stutz
+* _Entwurf_ der _nächsten_ Applikations-Version mit K. Stutz
 ** Wie sieht das aus Benutzersicht optimale Interaktions-Konzept für `Metropolis 2.0` aus?
 ** Wie ist das optimale Zusammenspiel zwischen den beiden Explorern?
 ** Was soll passieren, wenn im `CountryExplorer` ein Land selektiert wird?
@@ -51,29 +51,29 @@ Dementsprechend besteht das Assignment aus drei Teilen
 === Anforderungen
 [circle]
 * Gewünschte Funktionalität
-** 2 Explorer, jeweils mit Lazy-Loading aus der lokalen Datenbank `metropolisDB`, Sortier- und Filter-Möglichkeiten auf mindestens vier Spalten
-*** Implementierung basiert auf den Beispielen aus `module08`
-*** `CityExplorer` für die ca. 200'000 Städte und Gemeinden
-*** `CountryExplorer` für die ca. 250 Länder
-** 2 Editoren, jeweils mit Header-Bereich und Formular-Bereich
-*** Implementierung basiert auf den Beispielen aus `module09`
-*** `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten
-*** `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten
-** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden
-** die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können
-** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation
+** 2 Explorer, jeweils mit Lazy-Loading aus der lokalen Datenbank `metropolisDB`, Sortier- und Filter-Möglichkeiten auf mindestens vier Spalten ✔
+*** Implementierung basiert auf den Beispielen aus `module08` ✔
+*** `CityExplorer` für die ca. 200'000 Städte und Gemeinden ✔
+*** `CountryExplorer` für die ca. 250 Länder ✔
+** 2 Editoren, jeweils mit Header-Bereich und Formular-Bereich ✔
+*** Implementierung basiert auf den Beispielen aus `module09` ✔
+*** `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten ✔
+*** `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten ✔
+** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden ✔
+** die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können ✔
+** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation ~✔
 *** Selektion einer Stadt im `CityExplorer`
-**** "öffnet" den `CityEditor`
+**** "öffnet" den `CityEditor` ✔
 **** zeigt die Länder-Information in geeigneter Weise im `CountryExplorer`/`CountryEditor` an
 *** Selektion eines Landes im `CountryExplorer`
-**** öffnet den `CountryEditor`
+**** öffnet den `CountryEditor` ✔
 **** zeigt die Information der Hauptstadt in geeigneter Weise im `CityExplorer`/`CityEditor` an
 **** zeigt die Städte dieses Landes in geeigneter Weise im `CityExplorer` an
-** _Wichtiger Hinweis_: Es sind Veränderungen und Erweiterungen in den `xtracted`-Packages notwendig. Diese können nicht unverändert übernommen werden.
-* Die Implementierungssprache für die gesamte Applikation ist Kotlin
-* Das UI ist mit Compose Desktop zu entwickeln
-* Verwendung von JDBC für die Datenbank-Zugriffe
-* Keine Verwendung von externen Libraries, die nicht bereits im Unterricht eingesetzt wurden
+** _Wichtiger Hinweis_: Es sind Veränderungen und Erweiterungen in den `xtracted`-Packages notwendig. Diese können nicht unverändert übernommen werden. ✔
+* Die Implementierungssprache für die gesamte Applikation ist Kotlin ✔
+* Das UI ist mit Compose Desktop zu entwickeln ✔
+* Verwendung von JDBC für die Datenbank-Zugriffe ✔
+* Keine Verwendung von externen Libraries, die nicht bereits im Unterricht eingesetzt wurden ✔
 
 
 === Bewertung
@@ -88,11 +88,11 @@ Es können in diesem Assignment maximal 4 Punkte erreicht werden.
 ** Das Interaction-Design für `Metropolis 2.0` liegt in Form von Balsamiq-Wireframes vor und zeigt signifikante Verbesserungen gegenüber `Metropolis` (2 Punkte)
 ** Alle Kriterien für 1 Punkt sind erfüllt
 * 1 Punkt
-** Umsetzung von `CityExplorer` und `CityEditor`, auf Basis der `xtracted`-Packages aus `module08` und `module09`
-** Selektion einer Stadt "öffnet" den entsprechenden Editor
-** Änderungen im Editor können in der Datenbank abgespeichert werden
-** Neue Städte können angelegt werden
-** Bestehende Städte können aus der Datenbank gelöscht werden
+** Umsetzung von `CityExplorer` und `CityEditor`, auf Basis der `xtracted`-Packages aus `module08` und `module09` ✔
+** Selektion einer Stadt "öffnet" den entsprechenden Editor ✔
+** Änderungen im Editor können in der Datenbank abgespeichert werden ✔
+** Neue Städte können angelegt werden ✔
+** Bestehende Städte können aus der Datenbank gelöscht werden ✔
 * 0 Punkte
 ** falls kein `CityExplorer` und `CityEditor` implementiert wurde; das Interaction-Design von `Metropolis 2.0` reicht allein nicht für einen Punkt
 ** falls die Kriterien für einen Punkt nicht erfüllt sind ;-)
