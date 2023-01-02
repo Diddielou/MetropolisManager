@@ -8,16 +8,12 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.cities.combined.model.CitiesModuleState
 import metropolis.cities.editor.view.CityEditorUi
 import metropolis.cities.explorer.view.CityExplorerUI
 import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.model.MasterDetailState
-import metropolis.xtracted.view.ColumnText
-import metropolis.xtracted.view.MasterDetail
-import metropolis.xtracted.view.MasterDetailTopBar
-import metropolis.xtracted.view.VulcanSalute
+import metropolis.xtracted.view.*
 
 @Composable
 fun ApplicationScope.CitiesModuleWindow(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {
@@ -37,8 +33,8 @@ fun CitiesModuleUi(state: MasterDetailState<City>, trigger: (MasterDetailAction)
     val editorController = state.editorController
     val explorerController = state.lazyTableController
 
-    MasterDetail(
-        toolbar = { MasterDetailTopBar(state.selectedId, title = state.title, trigger = trigger) },
+     MasterDetailUi(
+        state = state,
         explorer = {
             with(explorerController) {
                 CityExplorerUI(
@@ -51,13 +47,11 @@ fun CitiesModuleUi(state: MasterDetailState<City>, trigger: (MasterDetailAction)
             }
         },
         editor = {
-            if(state.selectedId != null){
             CityEditorUi(
-                state = editorController.state,
-                trigger = { editorController.triggerAction(it) }
-            )} else {
-                ColumnText(text = "Select a city.")
-            }
-        }
+                    state = editorController.state,
+                    trigger = { editorController.triggerAction(it) }
+            )
+        },
+        trigger = trigger
     )
 }

@@ -25,12 +25,12 @@ fun main() {
         cityCrudRepository = cityCrudRepository)
 
     application {
-        val countriesModuleState = controller.state.countriesModuleController.state
+        //val countriesModuleState = controller.state.countriesModuleController.state
         //val citiesModuleState = controller.state.citiesModuleController.state // TODO state not accessible anymore
 
         // TODO access Action (initialize all Scopes)
-        countriesModuleState.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
-        countriesModuleState.countryEditorController.initializeUiScope(rememberCoroutineScope())
+        //countriesModuleState.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
+        //countriesModuleState.countryEditorController.initializeUiScope(rememberCoroutineScope())
         //citiesModuleState.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
         //citiesModuleState.cityEditorController.initializeUiScope(rememberCoroutineScope())
 

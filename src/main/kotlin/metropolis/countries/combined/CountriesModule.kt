@@ -19,13 +19,11 @@ fun main() {
     val url = "/data/metropolisDB".urlFromResources()
     val countryLazyRepository = countryLazyTableRepository(url)
     val countryCrudRepository = countryCrudRepository(url)
-    val controller = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
+    val module = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
 
     application {
-        controller.state.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
-        controller.state.countryEditorController.initializeUiScope(rememberCoroutineScope())
-
-        CountriesModuleWindow(state = controller.state, trigger = {}) // TODO
+        module.controller.initializeUiScopes() // must be run here because it is a Composable
+        CountriesModuleWindow(state = module.controller.state, trigger = { module.controller.executeAction(it) }) // TODO
     }
 
 }

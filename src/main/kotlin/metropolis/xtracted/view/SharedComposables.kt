@@ -37,7 +37,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import metropolis.countries.editor.view.CountryEditorUi
+import metropolis.countries.explorer.view.CountryExplorerUI
+import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
+import metropolis.xtracted.model.MasterDetailState
+import metropolis.xtracted.repository.Identifiable
 
 
 @Composable
@@ -330,5 +335,31 @@ fun Heading2(text: String, modifier: Modifier = Modifier){
         modifier    = modifier,
         color       = MaterialTheme.colors.secondary,
         fontWeight = FontWeight.Light
+    )
+}
+
+
+@Composable
+fun<D : Identifiable> MasterDetailUi(state: MasterDetailState<D>,
+                   explorer: @Composable () -> Unit,
+                   editor:   @Composable () -> Unit,
+                   trigger: (MasterDetailAction) -> Unit) {
+    val editorController = state.editorController
+    val explorerController = state.lazyTableController
+
+    MasterDetail(
+        toolbar = { MasterDetailTopBar(state.selectedId, title = state.title, trigger = trigger) },
+        explorer = {
+            with(explorerController) {
+                explorer()
+            }
+        },
+        editor = {
+            if(state.selectedId != null){
+                editor()
+            } else {
+                ColumnText(text = "Select a new element.")
+            }
+        }
     )
 }

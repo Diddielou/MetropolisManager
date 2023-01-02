@@ -24,29 +24,28 @@ class CitiesModuleController(
                                                                 onEditorAction = { reloadCityExplorer() })
 
     val controller = MasterDetailController(
-        title                      = "Cities MasterDetail",
+        title                      = "Cities",
         selectedId                 = initiallySelectedCityId,
+        // TODO: Fix
         initialLazyTableController = cityLazyTableController,
         initialEditorController    = cityEditorController,
         onNewTableController = { createNewCityExplorer() },
         onNewEditorController = { createNewCityEditor(it) }
         )
 
-    private fun showCityInEditor(id: Int){
-        controller.executeAction(MasterDetailAction.Open(id = id, editor = createNewCityEditor(id = id)))
+    private fun createNewCityExplorer(): LazyTableController<City> {
+        return cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) })
     }
-
-    private fun reloadCityExplorer(){
-        controller.executeAction(MasterDetailAction.Reload(explorer = createNewCityExplorer()))
-        controller.executeAction(MasterDetailAction.SetSelected())
-    }
-
     private fun createNewCityEditor(id: Int): EditorController<City> {
         return cityEditorController(id, crudRepository, onEditorAction = { reloadCityExplorer() })
     }
 
-    private fun createNewCityExplorer(): LazyTableController<City> {
-        return cityLazyTableController(lazyRepository, onSelectionChange = { showCityInEditor(it) })
+    private fun showCityInEditor(id: Int){
+        controller.executeAction(MasterDetailAction.Open(id = id, editor = createNewCityEditor(id = id)))
+    }
+    private fun reloadCityExplorer(){
+        controller.executeAction(MasterDetailAction.Reload(explorer = createNewCityExplorer()))
+        controller.executeAction(MasterDetailAction.SetSelected())
     }
 
 }

@@ -2,17 +2,16 @@ package metropolis.metropolis.view
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.cities.combined.model.CitiesModuleState
-import metropolis.countries.combined.model.CountriesModuleState
-import metropolis.countries.combined.view.CountriesModuleUi
+import metropolis.cities.shared.data.City
+import metropolis.countries.shared.data.Country
 import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.controller.editor.EditorAction
+import metropolis.xtracted.model.MasterDetailState
 import metropolis.xtracted.view.AlignLeftRight
 import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.Heading1
@@ -31,7 +30,7 @@ fun ApplicationScope.MetropolisWindow(state: MetropolisState) {
 private fun MetropolisUi(state: MetropolisState) {
     MasterDetail(
         toolbar = { MetropolisTopBar(state.title) },
-        explorer = { showCountriesUI(state = state.countriesModuleController.state, trigger = {}) },
+        explorer = {  }, //showCountriesUI(state = state.countriesModuleController.state, trigger = {})
         editor = { }// { showCitiesUI(state = state.citiesModuleController.controller.state, trigger = {}) }
     )
 
@@ -45,11 +44,11 @@ fun MetropolisTopBar(title: String){
 }
 
 @Composable
-private fun showCountriesUI(state: CountriesModuleState, trigger : (EditorAction) -> Unit){
-    CountriesModuleUi(state = state, trigger = trigger)
+private fun showCountriesUI(state: MasterDetailState<Country>, trigger : (EditorAction) -> Unit){
+    //CountriesModuleUi(state = state, trigger = trigger)
 }
 
 @Composable
-private fun showCitiesUI(state: CitiesModuleState, trigger : (EditorAction) -> Unit){
+private fun showCitiesUI(state: MasterDetailState<City>, trigger : (EditorAction) -> Unit){
     //CitiesModuleUi(state = state, trigger = trigger)
 }

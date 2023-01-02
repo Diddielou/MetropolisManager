@@ -37,7 +37,11 @@ class MasterDetailController<D: Identifiable>(
         is MasterDetailAction.Delete -> delete()
     }
 
-    // New item not seen in table, depending on table sort. Feature: set filter for this item
+    /*
+    New item not seen in table, depending on table sort. Feature: set filter for this item
+    Katrin Stutz:
+    City: // sort ORDER BY: COUNTRY_CODE: newly added item is at the top as the COUNTRY_CODE is '' (sorted before Soldeu)
+    Country: // sort ORDER BY: ISO_NUMERIC: newly added item is at the bottom as it has the highest ISO_NUMERIC */
     private fun add() : MasterDetailState<D> {
         val newId = state.editorController.repository.createKey()
         reloadTable(lazyTableController = onNewTableController())
