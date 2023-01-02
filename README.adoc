@@ -61,14 +61,14 @@ Dementsprechend besteht das Assignment aus drei Teilen
 *** `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten ✔
 ** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden ✔
 ** die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können ✔
-** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation ~✔
-*** Selektion einer Stadt im `CityExplorer`
+** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation ✔
+*** Selektion einer Stadt im `CityExplorer` ✔
 **** "öffnet" den `CityEditor` ✔
-**** zeigt die Länder-Information in geeigneter Weise im `CountryExplorer`/`CountryEditor` an
+**** zeigt die Länder-Information in geeigneter Weise im `CountryExplorer`/`CountryEditor` an (✔)
 *** Selektion eines Landes im `CountryExplorer`
 **** öffnet den `CountryEditor` ✔
-**** zeigt die Information der Hauptstadt in geeigneter Weise im `CityExplorer`/`CityEditor` an
-**** zeigt die Städte dieses Landes in geeigneter Weise im `CityExplorer` an
+**** zeigt die Information der Hauptstadt in geeigneter Weise im `CityExplorer`/`CityEditor` an (✔)
+**** zeigt die Städte dieses Landes in geeigneter Weise im `CityExplorer` an ✔
 ** _Wichtiger Hinweis_: Es sind Veränderungen und Erweiterungen in den `xtracted`-Packages notwendig. Diese können nicht unverändert übernommen werden. ✔
 * Die Implementierungssprache für die gesamte Applikation ist Kotlin ✔
 * Das UI ist mit Compose Desktop zu entwickeln ✔
