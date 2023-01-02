@@ -61,7 +61,7 @@ import metropolis.xtracted.data.UNORDERED
 import metropolis.xtracted.model.StringColumn
 import metropolis.xtracted.model.TableColumn
 import metropolis.xtracted.model.TableState
-import metropolis.xtracted.view.Heading2
+import metropolis.xtracted.view.Message
 import metropolis.xtracted.view.handCursor
 
 
@@ -168,7 +168,7 @@ private fun NoItemsBox(modifier: Modifier){
                            .background(tableCellBackground)
                            .border(color = cellBorderColor, width = Dp.Hairline),
         contentAlignment = Alignment.Center){
-        Heading2("No items found")
+        Message("No items found")
     }
 }
 

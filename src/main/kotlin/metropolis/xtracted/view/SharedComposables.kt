@@ -37,9 +37,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import metropolis.countries.editor.view.CountryEditorUi
-import metropolis.countries.explorer.view.CountryExplorerUI
-import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.model.MasterDetailState
 import metropolis.xtracted.repository.Identifiable
@@ -177,7 +174,7 @@ fun ColumnText(text : String) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxHeight()){
-        Heading2(text = text)
+        Message(text = text)
     }
 }
 
@@ -268,7 +265,8 @@ fun EditorHeadline(text: String, fontSize: TextUnit){
 @Composable
 fun MasterDetail(toolbar:  @Composable () -> Unit = {},
                  explorer: @Composable () -> Unit,
-                 editor:   @Composable () -> Unit){
+                 editor:   @Composable () -> Unit,
+                 weight1 : Float = 0.6f, weight2 : Float = 0.4f){
     val padding = 20.dp
     val elevation = 2.dp
 
@@ -282,12 +280,12 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.Top){
             Card(elevation = elevation,
-                modifier   =  Modifier.weight(0.6f)) {
+                modifier   =  Modifier.weight(weight1)) {
                 explorer()
             }
             Spacer(Modifier.width(padding))
             Card(elevation = elevation,
-                modifier   =  Modifier.weight(0.4f)) {
+                modifier   =  Modifier.weight(weight2)) {
                 editor()
             }
         }
@@ -310,13 +308,14 @@ fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ //
 @Composable
 fun MasterDetailTopBar(selected: Int?, title: String, trigger: (MasterDetailAction) -> Unit){
     AlignLeftRight() {
-        Heading1(text = title)
+        Heading2(text = title)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End){
             ActionIcon(trigger = trigger, action = MasterDetailAction.Add())
             ActionIcon(trigger = trigger, action = MasterDetailAction.Delete(enabled = selected != null))
         }
     }
 }
+
 
 @Composable
 fun Heading1(text: String, modifier: Modifier = Modifier){
@@ -331,6 +330,16 @@ fun Heading1(text: String, modifier: Modifier = Modifier){
 @Composable
 fun Heading2(text: String, modifier: Modifier = Modifier){
     Text(text       = text,
+        style       = MaterialTheme.typography.h5,
+        modifier    = modifier,
+        color       = MaterialTheme.colors.primary,
+        fontWeight = FontWeight.Normal
+    )
+}
+
+@Composable
+fun Message(text: String, modifier: Modifier = Modifier){
+    Text(text       = text,
         style       = MaterialTheme.typography.h6,
         modifier    = modifier,
         color       = MaterialTheme.colors.secondary,
@@ -344,15 +353,11 @@ fun<D : Identifiable> MasterDetailUi(state: MasterDetailState<D>,
                    explorer: @Composable () -> Unit,
                    editor:   @Composable () -> Unit,
                    trigger: (MasterDetailAction) -> Unit) {
-    val editorController = state.editorController
-    val explorerController = state.lazyTableController
 
     MasterDetail(
         toolbar = { MasterDetailTopBar(state.selectedId, title = state.title, trigger = trigger) },
         explorer = {
-            with(explorerController) {
                 explorer()
-            }
         },
         editor = {
             if(state.selectedId != null){

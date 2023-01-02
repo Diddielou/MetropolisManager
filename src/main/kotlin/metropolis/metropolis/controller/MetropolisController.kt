@@ -11,21 +11,21 @@ import metropolis.countries.shared.data.Country
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 
-class MetropolisController(
+class MetropolisController( // not generic
     countryLazyRepository: LazyRepository<Country>, countryCrudRepository: CrudRepository<Country>,
     cityLazyRepository : LazyRepository<City>, cityCrudRepository: CrudRepository<City>) {
 
-    private val initiallySelectedCityId = 2661552
+    private val initiallySelectedCityId = 3038999
     private val initiallySelectedCountryId = 0
 
-    val countriesController = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
-    val citiesController = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
+    val countriesModule = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository)
+    val citiesModule = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
 
     var state by mutableStateOf(
-        MetropolisState(
+        MetropolisState( // not generic
             title = "Metropolis",
-            countriesModuleController = countriesController,
-            citiesModuleController = citiesController)
+            countriesModuleController = countriesModule,
+            citiesModuleController = citiesModule)
     )
 
 }

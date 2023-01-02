@@ -1,6 +1,5 @@
 package metropolis.metropolis
 
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cities.shared.repository.cityCrudRepository
 import metropolis.cities.shared.repository.cityLazyTableRepository
@@ -25,16 +24,10 @@ fun main() {
         cityCrudRepository = cityCrudRepository)
 
     application {
-        //val countriesModuleState = controller.state.countriesModuleController.state
-        //val citiesModuleState = controller.state.citiesModuleController.state // TODO state not accessible anymore
+        controller.countriesModule.controller.initializeUiScopes()
+        controller.citiesModule.controller.initializeUiScopes()
 
-        // TODO access Action (initialize all Scopes)
-        //countriesModuleState.countryLazyTableController.initializeUiScope(rememberCoroutineScope())
-        //countriesModuleState.countryEditorController.initializeUiScope(rememberCoroutineScope())
-        //citiesModuleState.cityLazyTableController.initializeUiScope(rememberCoroutineScope())
-        //citiesModuleState.cityEditorController.initializeUiScope(rememberCoroutineScope())
-
-        //MetropolisWindow(controller.state)
+        MetropolisWindow(controller.state)
     }
 
 }
