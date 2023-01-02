@@ -1,7 +1,5 @@
 package metropolis.metropolis.view
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -11,14 +9,13 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cities.combined.model.CitiesModuleState
-import metropolis.cities.combined.view.CitiesModuleUi
 import metropolis.countries.combined.model.CountriesModuleState
 import metropolis.countries.combined.view.CountriesModuleUi
 import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.view.AlignLeftRight
 import metropolis.xtracted.view.MasterDetail
-import metropolis.xtracted.view.Welcome
+import metropolis.xtracted.view.Heading1
 
 @Composable
 fun ApplicationScope.MetropolisWindow(state: MetropolisState) {
@@ -43,7 +40,7 @@ private fun MetropolisUi(state: MetropolisState) {
 @Composable
 fun MetropolisTopBar(title: String){
     AlignLeftRight() {
-        Welcome(text = title, modifier = Modifier)
+        Heading1(text = title)
     }
 }
 

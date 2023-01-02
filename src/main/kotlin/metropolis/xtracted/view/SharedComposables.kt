@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 
 
@@ -164,8 +163,19 @@ fun VSpace(space: Dp) {
 @Composable
 fun VulcanSalute(size: TextUnit = 73.sp) {
     Text(text     = "\uD83D\uDD96",
-         fontSize = 73.sp)
+         fontSize = size)
 }
+
+@Composable
+fun ColumnText(text : String) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxHeight()){
+        Heading2(text = text)
+    }
+}
+
 
 private val tooltipBackground = Color(255, 255, 210)
 
@@ -282,7 +292,7 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
 @Composable
 fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ // TODO delete
     AlignLeftRight() {
-        Welcome(text = title, modifier = Modifier)
+        Heading1(text = title)
         Button(onClick = addOnClick){
             Text("Add")
         }
@@ -293,21 +303,32 @@ fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ //
 }
 
 @Composable
-fun MasterDetailTopBar(selected: Int, title: String, trigger: (MasterDetailAction) -> Unit){
+fun MasterDetailTopBar(selected: Int?, title: String, trigger: (MasterDetailAction) -> Unit){
     AlignLeftRight() {
-        Welcome(text = title, modifier = Modifier)
+        Heading1(text = title)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End){
             ActionIcon(trigger = trigger, action = MasterDetailAction.Add())
-            ActionIcon(trigger = trigger, action = MasterDetailAction.Delete(selected))
+            ActionIcon(trigger = trigger, action = MasterDetailAction.Delete(enabled = selected != null))
         }
     }
 }
 
 @Composable
-fun Welcome(text: String, modifier: Modifier){
+fun Heading1(text: String, modifier: Modifier = Modifier){
     Text(text       = text,
         style       = MaterialTheme.typography.h4,
         modifier    = modifier,
-        color       = MaterialTheme.colors.primary
+        color       = MaterialTheme.colors.primary,
+        fontWeight = FontWeight.Bold
+    )
+}
+
+@Composable
+fun Heading2(text: String, modifier: Modifier = Modifier){
+    Text(text       = text,
+        style       = MaterialTheme.typography.h6,
+        modifier    = modifier,
+        color       = MaterialTheme.colors.secondary,
+        fontWeight = FontWeight.Light
     )
 }

@@ -27,5 +27,5 @@ sealed class MasterDetailAction(
         class Reload<D : Identifiable>(val explorer: LazyTableController<D>)           : MasterDetailAction("Reload", Icons.Filled.Sync, true)
 
         class Add()               : MasterDetailAction("Add", Icons.Filled.Add, true)
-        class Delete(val id: Int) : MasterDetailAction("Delete", Icons.Filled.Delete, true)
+        class Delete(enabled: Boolean) : MasterDetailAction("Delete", Icons.Filled.Delete, enabled)
 }

@@ -6,6 +6,6 @@ import metropolis.xtracted.repository.Identifiable
 
 data class MasterDetailState<T : Identifiable>(
     val title: String,
-    val selectedId : Int,
+    val selectedId : Int?,
     val lazyTableController: LazyTableController<T>,
     val editorController: EditorController<T>)
