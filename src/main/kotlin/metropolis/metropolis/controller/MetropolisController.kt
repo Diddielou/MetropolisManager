@@ -23,8 +23,8 @@ class MetropolisController( // not generic
     private val initiallySelectedCountryId = 0
 
     val countriesModule = CountriesModuleController(initiallySelectedCountryId, countryLazyRepository, countryCrudRepository, onCountrySelection = { filterAndSelectFittingCapital(it) })
-    val citiesModule = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
-    
+    val citiesModule = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository, onCitySelection = { selectFittingCountry(it) })
+
     var state by mutableStateOf(
         MetropolisState( // not generic
             title = "Metropolis",
@@ -50,6 +50,24 @@ class MetropolisController( // not generic
                     if(capitalId != selectedId){ // prevent endless sql statement loop
                         citiesModule.controller.executeAction(MasterDetailAction.SetSelected(capitalCity.id))
                     }
+                }
+            }
+        }
+    }
+
+    private fun selectFittingCountry(city: City?){
+        // nimm von der City den CC...
+        val countryCode = city?.countryCode // countryCode of selected City
+        val selectedId = countriesModule.controller.state.selectedId
+        if(countryCode != null){
+            //und hole mir das Land dazu
+            val controller = countriesModule.controller.state.lazyTableController
+            // Look for a country with this countryCode; this is the countries ISO_ALPHA2
+            val country = controller.searchFor(countryCode, column = CountryColumn.ISO_ALPHA2)
+            if(country != null) {
+                val countryId = country.id
+                if(countryId != selectedId) { // prevent endless sql statement loop
+                    countriesModule.controller.executeAction(MasterDetailAction.SetSelected(countryId))
                 }
             }
         }
