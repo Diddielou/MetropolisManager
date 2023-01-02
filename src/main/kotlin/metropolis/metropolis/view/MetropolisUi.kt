@@ -10,9 +10,14 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.cities.combined.model.CitiesModuleState
+import metropolis.cities.combined.view.CitiesModuleUi
+import metropolis.countries.combined.model.CountriesModuleState
 import metropolis.countries.combined.view.CountriesModuleUi
 import metropolis.metropolis.data.MetropolisState
+import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.view.AlignLeftRight
+import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.Welcome
 
 @Composable
@@ -22,37 +27,17 @@ fun ApplicationScope.MetropolisWindow(state: MetropolisState) {
            state          = rememberWindowState(width    = 1200.dp,
                                                 height   = 900.dp,
                                                 position = WindowPosition(Alignment.Center))) {
-
-
-        var isPerformingTask by remember { mutableStateOf(true) }
-
-        LaunchedEffect(Unit) {
-            //delay(2000) // Do some heavy lifting
-            isPerformingTask = false
-        }
-
-        if (isPerformingTask) {
-            Window(onCloseRequest = ::exitApplication) {
-                Text("Performing some tasks. Please wait!")
-            }
-        } else {
-            Window(onCloseRequest = ::exitApplication) {
-                Text("Hello, World!")
-            }
-        }
     }
 }
 
 @Composable
 private fun MetropolisUi(state: MetropolisState) {
-    MetropolisTopBar(title = state.title)
+    MasterDetail(
+        toolbar = { MetropolisTopBar(state.title) },
+        explorer = { showCountriesUI(state = state.countriesModuleController.state, trigger = {}) },
+        editor = { }// { showCitiesUI(state = state.citiesModuleController.controller.state, trigger = {}) }
+    )
 
-    Column(modifier            = Modifier.fillMaxSize(),
-           horizontalAlignment = Alignment.Start,
-           verticalArrangement = Arrangement.Top) {
-          //CountriesModuleUi(state = state.countriesModuleController.state) // MasterDetail -> Column
-          //CitiesModuleUi(state = ) // MasterDetail -> Column // TODO state not accessible anymore
-    }
 }
 
 @Composable
@@ -60,4 +45,14 @@ fun MetropolisTopBar(title: String){
     AlignLeftRight() {
         Welcome(text = title, modifier = Modifier)
     }
+}
+
+@Composable
+private fun showCountriesUI(state: CountriesModuleState, trigger : (EditorAction) -> Unit){
+    CountriesModuleUi(state = state, trigger = trigger)
+}
+
+@Composable
+private fun showCitiesUI(state: CitiesModuleState, trigger : (EditorAction) -> Unit){
+    //CitiesModuleUi(state = state, trigger = trigger)
 }

@@ -22,7 +22,7 @@ fun main() {
     val module = CitiesModuleController(initiallySelectedCityId, cityLazyRepository, cityCrudRepository)
 
     application {
-        // TODO: MasterDetailAction initializeUiSCopes
+        // TODO: MasterDetailAction initializeUiScopes
         module.controller.initializeUiScopes()
         CitiesModuleWindow(state = module.controller.state, trigger = { module.controller.executeAction(it) })
     }

@@ -28,11 +28,13 @@ Dementsprechend besteht das Assignment aus drei Teilen
 * _Entwurf_ der Applikation, so dass die Applikation _mit möglichst geringem Aufwand_ technisch umsetzbar ist. Normalerweise hat dieser Entwurf Schwächen im Bereich der Usability.
 ** Dieser Entwurf muss nicht weiter dokumentiert werden (kein Wireframe muss abgegeben werden)
 ** Empfehlung: suchen Sie in einem Team von 2-3 Personen nach der einfachsten Lösung
+
 * _Implementierung_ von `Metropolis`
 ** basierend auf den Beispielen und insbesondere den `xtracted`-Packages aus `module08` und `module09`
 ** die beiden Explorer müssen LazyLoading, Sortieren und Filtern unterstützen
 ** die Editoren unterstützen Mehrsprachigkeit, Input-Validierung und Undo/Redo
 ** das ist eine Einzelarbeit
+
 * _Entwurf_ der _nächsten_ Applikations-Version. mit K. Stutz
 ** Wie sieht das aus Benutzersicht optimale Interaktions-Konzept für `Metropolis 2.0` aus?
 ** Wie ist das optimale Zusammenspiel zwischen den beiden Explorern?

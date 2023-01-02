@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 
 
@@ -262,7 +263,7 @@ fun MasterDetail(toolbar:  @Composable () -> Unit = {},
         ){
             toolbar()
         }
-        Row(modifier = Modifier.fillMaxWidth().padding(padding), // fillMaxSize(), .fillMaxWidth()
+        Row(modifier = Modifier.fillMaxWidth().padding(padding),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.Top){
             Card(elevation = elevation,
@@ -295,8 +296,10 @@ fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ //
 fun MasterDetailTopBar(selected: Int, title: String, trigger: (MasterDetailAction) -> Unit){
     AlignLeftRight() {
         Welcome(text = title, modifier = Modifier)
-        ActionButton(trigger = trigger, action = MasterDetailAction.Add())
-        ActionButton(trigger = trigger, action = MasterDetailAction.Delete(selected))
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End){
+            ActionIcon(trigger = trigger, action = MasterDetailAction.Add())
+            ActionIcon(trigger = trigger, action = MasterDetailAction.Delete(selected))
+        }
     }
 }
 

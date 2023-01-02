@@ -4,7 +4,7 @@ import java.sql.ResultSet
 import metropolis.xtracted.data.DbColumn
 
 class CrudRepository<D: Identifiable>(private val url        : String,
-                                      private val table      : String,
+                                      val table      : String,
                                       private val idColumn   : DbColumn,
                                       private val dataColumns: Map<DbColumn, (D) -> String?>, //maps DbColumn to cell value of data
                                       private val mapper     : ResultSet.() -> D,

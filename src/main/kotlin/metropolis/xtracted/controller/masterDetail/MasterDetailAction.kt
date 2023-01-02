@@ -4,8 +4,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.OpenInNew
+import androidx.compose.material.icons.filled.Sync
 import androidx.compose.ui.graphics.vector.ImageVector
 import metropolis.cities.shared.data.City
+import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.Action
 import metropolis.xtracted.controller.editor.EditorController
 import metropolis.xtracted.controller.lazyloading.LazyTableController
@@ -17,13 +19,12 @@ sealed class MasterDetailAction(
     override val enabled : Boolean) : Action {
 
         //class SetSelected()       : MasterDetailAction<>("SetSelected", null, true) // TODO
-        //class Open(val id: Int, val editor: EditorController<City>)  : MasterDetailAction("Open", Icons.Filled.OpenInNew, true)
-        //class Reload(val explorer: LazyTableController<City>)          : MasterDetailAction("Reload", null, true)
 
-    // TODO: how to make generic?
-    //class Open(val id: Int, val editor: EditorController<Country>)  : MasterDetailAction("Open", Icons.Filled.OpenInNew, true)
-    //class Reload(val explorer: LazyTableController<Country>)          : MasterDetailAction("Reload", null, true)
-
+        // TODO: how to make generic?
+        // Hier gelang es mir nicht, Klassen zu erstellen, die generische Argumente entgegennehmen für die EditorController LazyTableController.
+        // Auf Google/Stackoverflow fand ich nichts und das überstieg mein Wissen über Generics...
+        class Open<D : Identifiable>(val id: Int, val editor: EditorController<D>)     : MasterDetailAction("Open", Icons.Filled.OpenInNew, true)
+        class Reload<D : Identifiable>(val explorer: LazyTableController<D>)           : MasterDetailAction("Reload", Icons.Filled.Sync, true)
 
         class Add()               : MasterDetailAction("Add", Icons.Filled.Add, true)
         class Delete(val id: Int) : MasterDetailAction("Delete", Icons.Filled.Delete, true)

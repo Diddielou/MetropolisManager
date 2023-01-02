@@ -5,6 +5,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import metropolis.cities.editor.controller.cityEditorController
 import metropolis.cities.explorer.controller.cityLazyTableController
 import metropolis.cities.shared.data.City
+import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.ControllerBase
 import metropolis.xtracted.controller.editor.EditorController
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
@@ -16,32 +17,50 @@ import metropolis.xtracted.repository.LazyRepository
 
 class MasterDetailController<D: Identifiable>(
     var title : String,
-    private var selectedId : Int,
+    private var selectedId : Int?,
     private var initialLazyTableController: LazyTableController<D>,
     private var initialEditorController: EditorController<D>) :
 
     ControllerBase<MasterDetailState<D>, MasterDetailAction>(
         initialState = MasterDetailState(
             title = title,
-            selectedId = selectedId,
+            selectedId = selectedId!!,
             lazyTableController = initialLazyTableController,
             editorController = initialEditorController)) {
 
     override fun executeAction(action: MasterDetailAction) : MasterDetailState<D> = when (action) {
         // TODO make generic
-        // is MasterDetailAction.Open -> showElementInEditor(action.id, action.editor)
-        //is MasterDetailAction.Reload -> reloadTable(action.explorer)
+        is MasterDetailAction.Open<*> -> showElementInEditor(action.id, action.editor as EditorController<D>)
+        is MasterDetailAction.Reload<*> -> reloadTable(action.explorer as LazyTableController<D>)
         is MasterDetailAction.Add -> add()
         is MasterDetailAction.Delete -> delete(action.id)
     }
 
     // TODO New item not seen in table as long as not saved
     private fun add() : MasterDetailState<D> {
+
         val newId = state.editorController.repository.createKey()
-        reloadTable(lazyTableController = initialLazyTableController)
-        showElementInEditor(newId, initialEditorController)
+
+        // if a CityEditor and an item is selected, take the country code of the selected for creation
+        /*
+        Metropolis:
+        if(state.editorController.repository.table == "CITY"){ // TODO: unschön, da table nicht mehr private
+
+        }
+        Expenses:
+        if(selectedExpense != null){
+                newExpense = repository.create(initialExpense.copy(createDate = selectedExpense!!.createDate))
+                val index = state.allExpenses.indexOf(selectedExpense)
+                allExpenses.add(index, newExpense)
+            } else {
+                newExpense = repository.create(initialExpense)
+                allExpenses.add(0, newExpense)
+            }
+         */
+        state = reloadTable(lazyTableController = initialLazyTableController)
+        state = showElementInEditor(newId, initialEditorController)
+        state =  state.copy(selectedId = newId, lazyTableController = state.lazyTableController, editorController = state.editorController)
         setSelectedInExplorer()
-        //val newState =  state.copy(selectedId = newId, lazyTableController = state.lazyTableController, editorController = state.editorController)
         return state
     }
 
@@ -52,21 +71,23 @@ class MasterDetailController<D: Identifiable>(
         //selectedId = newId
         state.lazyTableController.triggerAction(LazyTableAction.SelectNext)
         selectedId = state.lazyTableController.state.selectedId!!
-        reloadTable(lazyTableController = initialLazyTableController)
+        return reloadTable(lazyTableController = initialLazyTableController)
         //setSelectedInExplorer()
-        return state
     }
 
     fun setSelectedInExplorer(){  // TODO
-        state.lazyTableController.triggerAction(LazyTableAction.Select(selectedId))
+        state.lazyTableController.triggerAction(LazyTableAction.Select(selectedId!!))
     }
-    fun showElementInEditor(id: Int, editorController: EditorController<D>) {
+    fun showElementInEditor(id: Int, editorController: EditorController<D>) : MasterDetailState<D> {
         selectedId = id
+        println("showElementInEditor() executed")
         state = state.copy(selectedId = id, editorController = editorController)
+        return state
     }
-    fun reloadTable(lazyTableController: LazyTableController<D>) {
-        println("reloadTable executed")
+    fun reloadTable(lazyTableController: LazyTableController<D>) : MasterDetailState<D> {
+        println("reloadTable() executed")
         state = state.copy(lazyTableController = lazyTableController)
+        return state
     }
 
     @Composable

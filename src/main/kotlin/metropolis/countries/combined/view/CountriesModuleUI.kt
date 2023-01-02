@@ -11,13 +11,14 @@ import androidx.compose.ui.window.rememberWindowState
 import metropolis.countries.combined.model.CountriesModuleState
 import metropolis.countries.editor.view.CountryEditorUi
 import metropolis.countries.explorer.view.CountryExplorerUI
+import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.MasterDetailTopBar
 import metropolis.xtracted.view.TopBar
 
 @Composable
-fun ApplicationScope.CountriesModuleWindow(state: CountriesModuleState, trigger: (MasterDetailAction) -> Unit) {
+fun ApplicationScope.CountriesModuleWindow(state: CountriesModuleState, trigger: (EditorAction) -> Unit) {
     Window(title          = state.title,
         onCloseRequest = { exitApplication() },
         state          = rememberWindowState(width    = 1000.dp,
@@ -30,7 +31,7 @@ fun ApplicationScope.CountriesModuleWindow(state: CountriesModuleState, trigger:
 }
 
 @Composable
-fun CountriesModuleUi(state: CountriesModuleState, trigger: (MasterDetailAction) -> Unit) {
+fun CountriesModuleUi(state: CountriesModuleState, trigger: (EditorAction) -> Unit) {
     val editorController = state.countryEditorController
     val explorerController = state.countryLazyTableController
 
