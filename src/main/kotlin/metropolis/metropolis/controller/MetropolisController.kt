@@ -42,16 +42,11 @@ class MetropolisController( // not generic
         val countryCode = country?.isoAlpha2
         val countryCapital = country?.capital
         val selectedId = citiesModule.controller.state.selectedId
-        val selectedCountryIdCurrent = countriesModule.controller.state.selectedId
 
-        println("onCountrySelection -> filterAndSelectFittingCapital(): ${country?.name} clicked")
-        if(country != null){ //  && country.id != selectedCountryId Doesn't work
-            //println("country: ${country.name}, cur: ${country.id} != $selectedCountryIdCurrent, cmod: ${country.id} != $selectedCountryId")
-            println("onCountrySelection -> filterAndSelectFittingCapital(): selectionFromCityExplorer: $selectionFromCityExplorer") //, citySelected: $citySelected")
-            if(!selectionFromCityExplorer){ //country.id != selectedCountryIdCurrent && country.id != selectedCountryId
+        if(country != null){
+            if(!selectionFromCityExplorer){ // but only if you clicked on a country directly, or: if the call doesn't come from onCitySelected()
                 citiesModule.controller.state.lazyTableController.executeAction(LazyTableAction.SetFilter(column = ccCol, filter = countryCode!!))
                 // select the city that is the country's capital
-                //if(country.id != selectedCountryId){ // but only if this country isn't already selected
                 if(countryCapital != null && countryCapital != "..."){
                     val controller = citiesModule.controller.state.lazyTableController
                     // Look for a city with this capital's name; this is the countries ASCII_NAME
@@ -59,7 +54,6 @@ class MetropolisController( // not generic
                     if(capitalCity != null) {
                         val capitalId = capitalCity.id
                         if(capitalId != selectedId){ // prevent endless sql statement loop
-                            println("onCountrySelection -> filterAndSelectFittingCapital(): capitalCity: ${capitalCity.name} selected")
                             citiesModule.controller.executeAction(MasterDetailAction.SetSelected(capitalCity.id))
                         }
                     }

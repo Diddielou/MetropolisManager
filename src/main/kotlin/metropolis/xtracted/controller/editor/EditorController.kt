@@ -68,7 +68,6 @@ class EditorController<D: Identifiable>(val id: Int,
             }
         }
         onEditorAction()
-        //println("onEditorAction executed in save()")
         return state.copy(attributes = updatedAttributes)
     }
 

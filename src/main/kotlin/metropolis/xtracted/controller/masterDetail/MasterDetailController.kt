@@ -45,8 +45,6 @@ class MasterDetailController<D: Identifiable>(
         reloadTable(lazyTableController = onNewTableController())
         showElementInEditor(newId, onNewEditorController(newId))
         setSelectedInExplorer(null)
-        // doesn't work (yet) from this Controller:
-        // state.lazyTableController.executeAction(LazyTableAction.SetFilter(column = ))
         return state
     }
     private fun delete() : MasterDetailState<D> {

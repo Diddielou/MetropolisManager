@@ -29,11 +29,9 @@ class CountriesModuleController (
 
     private fun showCountryInEditor(id: Int){
         val selectedId = controller.state.selectedId
-        //println("showCountryInEditor() | MasterDetailAction.Open:")
         controller.executeAction(MasterDetailAction.Open(id = id, editor = createNewCountryEditor(id = id)))
         if(selectedId != id){
             val country = controller.state.lazyTableController.getData(id)
-            println("showCountryInEditor() | onCountrySelection: ${country.name}")
             onCountrySelection(country)
         }
     }
