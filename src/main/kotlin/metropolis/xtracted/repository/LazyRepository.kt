@@ -25,14 +25,25 @@ class LazyRepository<T>(private val url        : String,
                   where   = "$idColumn = $id",
                   map     = { mapper() })
 
-    fun readSpecific(filterString: String, column: DbColumn) : T? {
-        val replacedText = filterString.asSql() //.replace("'", "''") // "St. John's" for example has to be escaped // TODO test with st. johns
-        //val finalText = "'$replacedText'"
-        return readFirst(url     = url,
-            table   = table,
+    fun readSpecific(filterString: String, column: DbColumn, column2: DbColumn?) : T? {
+        val replacedText = filterString.asSql()
+        val resultCol1 = readFirst(url = url,
+            table = table,
             columns = dataColumns.joinToString(),
-            where   = "$column = $replacedText",
-            map     = { mapper() })
+            where = "$column = $replacedText",
+            map = { mapper() })
+
+        return if(resultCol1 == null) {
+            val resultCol2 = readFirst(url = url,
+                table = table,
+                columns = dataColumns.joinToString(),
+                where = "$column2 = $replacedText",
+                map = { mapper() })
+            resultCol2
+        }  else {
+            resultCol1
+        }
+
     }
 
     fun totalCount() =

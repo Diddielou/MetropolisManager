@@ -10,6 +10,7 @@ import metropolis.cities.shared.repository.CityColumn
 import metropolis.countries.combined.controller.CountriesModuleController
 import metropolis.countries.shared.data.Country
 import metropolis.countries.shared.repository.CountryColumn
+import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.repository.CrudRepository
@@ -50,7 +51,7 @@ class MetropolisController( // not generic
                 if(countryCapital != null && countryCapital != "..."){
                     val controller = citiesModule.controller.state.lazyTableController
                     // Look for a city with this capital's name; this is the countries ASCII_NAME
-                    val capitalCity = controller.searchFor(countryCapital, column = CityColumn.ASCII_NAME)
+                    val capitalCity = controller.searchFor(countryCapital, column = CityColumn.ASCII_NAME, column2 = CityColumn.NAME)
                     if(capitalCity != null) {
                         val capitalId = capitalCity.id
                         if(capitalId != selectedId){ // prevent endless sql statement loop
@@ -77,7 +78,7 @@ class MetropolisController( // not generic
             //und hole mir das Land dazu
             val controller = countriesModule.controller.state.lazyTableController
             // Look for a country with this countryCode; this is the countries ISO_ALPHA2
-            val country = controller.searchFor(countryCode, column = CountryColumn.ISO_ALPHA2)
+            val country = controller.searchFor(countryCode, column = CountryColumn.ISO_ALPHA2, null)
             if(country != null) {
                 val countryId = country.id
                 if(countryId != selectedId) { // prevent endless sql statement loop

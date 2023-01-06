@@ -55,8 +55,8 @@ class LazyTableController<T>(title                  : String,
             defaultItem
         }
 
-    fun searchFor(text: String, column: DbColumn) : T? =
-        repository.readSpecific(text, column)
+    fun searchFor(text: String, column: DbColumn, column2: DbColumn?) : T? =
+        repository.readSpecific(text, column, column2)
 
     override fun executeAction(action: LazyTableAction) : TableState<T> =
         when (action) {
