@@ -24,7 +24,7 @@ fun <T> readFirst(url: String, table: String, columns: String = "*", where: Stri
             val resultSet = it.createStatement()
                 .executeQuery(sql)
 
-            logger.info("$sql \n took ${System.currentTimeMillis() - start} msec")
+            //logger.info("$sql \n took ${System.currentTimeMillis() - start} msec")
             if (resultSet.next()) {
                 resultSet.map()
             } else {

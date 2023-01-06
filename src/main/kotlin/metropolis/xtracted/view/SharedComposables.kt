@@ -306,7 +306,7 @@ fun TopBar(title: String, addOnClick: () -> Unit, deleteOnClick: () -> Unit){ //
 }
 
 @Composable
-fun MasterDetailTopBar(selected: Int?, title: String, trigger: (MasterDetailAction) -> Unit){
+fun MasterDetailToolBar(selected: Int?, title: String, trigger: (MasterDetailAction) -> Unit){
     AlignLeftRight() {
         Heading2(text = title)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End){
@@ -355,7 +355,7 @@ fun<D : Identifiable> MasterDetailUi(state: MasterDetailState<D>,
                    trigger: (MasterDetailAction) -> Unit) {
 
     MasterDetail(
-        toolbar = { MasterDetailTopBar(state.selectedId, title = state.title, trigger = trigger) },
+        toolbar = { MasterDetailToolBar(state.selectedId, title = state.title, trigger = trigger) },
         explorer = {
                 explorer()
         },

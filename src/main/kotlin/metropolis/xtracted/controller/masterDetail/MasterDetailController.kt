@@ -49,11 +49,10 @@ class MasterDetailController<D: Identifiable>(
         // state.lazyTableController.executeAction(LazyTableAction.SetFilter(column = ))
         return state
     }
-
     private fun delete() : MasterDetailState<D> {
         val repo = state.editorController.repository
         return if (state.selectedId != null){
-            repo.delete(selectedId!!)
+            repo.delete(selectedId)
             reloadTable(lazyTableController = onNewTableController())
             state = state.copy(selectedId = null)
             state

@@ -26,12 +26,12 @@ class LazyRepository<T>(private val url        : String,
                   map     = { mapper() })
 
     fun readSpecific(filterString: String, column: DbColumn) : T? {
-        val replacedText = filterString.replace("'", "''") // "St. John's" for example has to be escaped
-        val finalText = "'$replacedText'"
+        val replacedText = filterString.asSql() //.replace("'", "''") // "St. John's" for example has to be escaped // TODO test with st. johns
+        //val finalText = "'$replacedText'"
         return readFirst(url     = url,
             table   = table,
             columns = dataColumns.joinToString(),
-            where   = "$column = $finalText",
+            where   = "$column = $replacedText",
             map     = { mapper() })
     }
 

@@ -28,7 +28,6 @@ class CitiesModuleController(
     private fun createNewCityEditor(id: Int) =
         cityEditorController(id, crudRepository, onEditorAction = { reloadCityExplorer() })
 
-
     private fun showCityInEditor(id: Int){
         controller.executeAction(MasterDetailAction.Open(id = id, editor = createNewCityEditor(id = id)))
         val city = controller.state.lazyTableController.getData(id)

@@ -35,6 +35,7 @@ private fun MetropolisUi(state: MetropolisState) {
     val countryController = state.countriesModuleController.controller
     val cityController = state.citiesModuleController.controller
 
+    // ui scopes can only be initialized here
     countryController.initializeUiScopes()
     cityController.initializeUiScopes()
 
