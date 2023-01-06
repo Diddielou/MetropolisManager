@@ -33,6 +33,7 @@ class MasterDetailController<D: Identifiable>(
         is MasterDetailAction.Reload<*> -> reloadTable(action.explorer as LazyTableController<D>)
         is MasterDetailAction.Add -> add()
         is MasterDetailAction.Delete -> delete()
+        is MasterDetailAction.DeselectEditor -> deselectEditor()
     }
 
     /*
@@ -52,8 +53,7 @@ class MasterDetailController<D: Identifiable>(
         return if (state.selectedId != null){
             repo.delete(selectedId)
             reloadTable(lazyTableController = onNewTableController())
-            state = state.copy(selectedId = null)
-            state
+            deselectEditor()
         } else {
             state
         }
@@ -65,6 +65,10 @@ class MasterDetailController<D: Identifiable>(
         } else {
             state.lazyTableController.triggerAction(LazyTableAction.Select(selectedId))
         }
+        return state
+    }
+    private fun deselectEditor() : MasterDetailState<D> {
+        state = state.copy(selectedId = null)
         return state
     }
     private fun showElementInEditor(id: Int, editorController: EditorController<D>) : MasterDetailState<D> {

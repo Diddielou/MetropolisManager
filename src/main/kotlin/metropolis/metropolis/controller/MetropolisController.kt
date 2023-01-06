@@ -56,7 +56,13 @@ class MetropolisController( // not generic
                         if(capitalId != selectedId){ // prevent endless sql statement loop
                             citiesModule.controller.executeAction(MasterDetailAction.SetSelected(capitalCity.id))
                         }
+                    } else {
+                        // deselect city editor when there was no capital found
+                        citiesModule.controller.executeAction(MasterDetailAction.DeselectEditor())
                     }
+                } else {
+                    // deselect city editor when there is not even a capital in the country
+                    citiesModule.controller.executeAction(MasterDetailAction.DeselectEditor())
                 }
             }
             selectionFromCityExplorer = false
@@ -67,7 +73,6 @@ class MetropolisController( // not generic
         // nimm von der City den CC...
         val countryCode = city?.countryCode // countryCode of selected City
         val selectedId = countriesModule.controller.state.selectedId
-        println("onCitySelection -> selectFittingCountry(): ${city?.name} clicked")
         if(countryCode != null && countryCode != "..."){
             //und hole mir das Land dazu
             val controller = countriesModule.controller.state.lazyTableController
@@ -76,14 +81,11 @@ class MetropolisController( // not generic
             if(country != null) {
                 val countryId = country.id
                 if(countryId != selectedId) { // prevent endless sql statement loop
-                    println("onCitySelection -> selectFittingCountry(): country ${country.name} selected")
-                    //println("city: country: ${country.id} != $selectedId")
                     selectionFromCityExplorer = true
                     countriesModule.controller.executeAction(MasterDetailAction.SetSelected(countryId))
                 }
             }
         }
-        println("onCitySelection -> selectFittingCountry(): selectionFromCityExplorer: $selectionFromCityExplorer")
     }
 
 }
