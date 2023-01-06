@@ -13,7 +13,7 @@ import metropolis.countries.explorer.view.CountryExplorerUI
 import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.model.MasterDetailState
-import metropolis.xtracted.view.*
+import metropolis.xtracted.view.MasterDetailUi
 
 @Composable
 fun ApplicationScope.CountriesModuleWindow(state: MasterDetailState<Country>, trigger: (MasterDetailAction) -> Unit) {

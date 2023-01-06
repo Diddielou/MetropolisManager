@@ -1,6 +1,5 @@
 package metropolis.metropolis.controller
 
-import metropolis.metropolis.data.MetropolisState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +9,7 @@ import metropolis.cities.shared.repository.CityColumn
 import metropolis.countries.combined.controller.CountriesModuleController
 import metropolis.countries.shared.data.Country
 import metropolis.countries.shared.repository.CountryColumn
-import metropolis.xtracted.controller.editor.EditorAction
+import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.repository.CrudRepository

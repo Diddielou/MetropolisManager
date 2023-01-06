@@ -1,6 +1,6 @@
 package metropolis.metropolis.view
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
@@ -12,8 +12,8 @@ import metropolis.countries.combined.view.CountriesMasterDetailUi
 import metropolis.metropolis.data.MetropolisState
 import metropolis.xtracted.view.AlignLeftRight
 import metropolis.xtracted.view.ExpensesAppTheme
-import metropolis.xtracted.view.MasterDetail
 import metropolis.xtracted.view.Heading1
+import metropolis.xtracted.view.MasterDetail
 
 @Composable
 fun ApplicationScope.MetropolisWindow(state: MetropolisState) {

@@ -1,5 +1,9 @@
 package metropolis.xtracted.repository
 
+import metropolis.xtracted.data.DbColumn
+import metropolis.xtracted.data.Filter
+import metropolis.xtracted.data.SortDirective
+import metropolis.xtracted.data.asSql
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -7,10 +11,6 @@ import java.sql.Statement
 import java.time.LocalDate
 import java.util.logging.Logger
 import kotlin.time.Duration
-import metropolis.xtracted.data.DbColumn
-import metropolis.xtracted.data.Filter
-import metropolis.xtracted.data.SortDirective
-import metropolis.xtracted.data.asSql
 
 fun <T> readFirst(url: String, table: String, columns: String = "*", where: String , map: ResultSet.() -> T?) =
     DriverManager.getConnection(url)

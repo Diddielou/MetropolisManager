@@ -1,18 +1,13 @@
 package metropolis.xtracted.controller.editor
 
-import java.util.*
 import metropolis.xtracted.controller.ControllerBase
 import metropolis.xtracted.controller.Scheduler
 import metropolis.xtracted.controller.undo.Snapshot
 import metropolis.xtracted.controller.undo.UndoController
-import metropolis.xtracted.model.Attribute
-import metropolis.xtracted.model.AttributeId
-import metropolis.xtracted.model.EditorState
-import metropolis.xtracted.model.Translatable
-import metropolis.xtracted.model.UndoState
-import metropolis.xtracted.model.ValidationResult
+import metropolis.xtracted.model.*
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.Identifiable
+import java.util.*
 
 val ch = Locale("de", "CH")
 

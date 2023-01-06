@@ -1,36 +1,28 @@
 package metropolis.countries.editor.view
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.countries.editor.controller.Id
 import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.model.Attribute
 import metropolis.xtracted.model.EditorState
 import metropolis.xtracted.model.get
+import metropolis.xtracted.view.EditorHeadline
 import metropolis.xtracted.view.VSpace
 import metropolis.xtracted.view.editor.EditorBar
 import metropolis.xtracted.view.editor.Form
 import metropolis.xtracted.view.format
 import metropolis.xtracted.view.pp
-import metropolis.countries.editor.controller.Id
-import metropolis.xtracted.view.EditorHeadline
 
 @Composable
 fun ApplicationScope.CountryEditorWindow(state: EditorState<Country>, trigger : (EditorAction) -> Unit) {

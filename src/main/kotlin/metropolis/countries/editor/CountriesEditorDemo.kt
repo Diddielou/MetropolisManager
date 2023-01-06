@@ -1,14 +1,14 @@
 package metropolis.countries.editor
 
 import androidx.compose.runtime.rememberCoroutineScope
-import java.util.logging.Level
-import java.util.logging.LogManager
-import java.util.logging.Logger
 import androidx.compose.ui.window.application
 import metropolis.countries.editor.controller.countryEditorController
 import metropolis.countries.editor.view.CountryEditorWindow
 import metropolis.countries.shared.repository.countryCrudRepository
 import metropolis.xtracted.repository.urlFromResources
+import java.util.logging.Level
+import java.util.logging.LogManager
+import java.util.logging.Logger
 
 fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.INFO

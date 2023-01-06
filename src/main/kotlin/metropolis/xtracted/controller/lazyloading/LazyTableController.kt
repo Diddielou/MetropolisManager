@@ -1,11 +1,9 @@
 package metropolis.xtracted.controller.lazyloading
 
-import java.util.*
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.ui.focus.FocusRequester
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import metropolis.xtracted.controller.ControllerBase
 import metropolis.xtracted.controller.LRUCache
 import metropolis.xtracted.controller.Scheduler
@@ -13,6 +11,7 @@ import metropolis.xtracted.data.*
 import metropolis.xtracted.model.TableColumn
 import metropolis.xtracted.model.TableState
 import metropolis.xtracted.repository.LazyRepository
+import java.util.*
 
 
 class LazyTableController<T>(title                  : String,

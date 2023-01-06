@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import metropolis.xtracted.view.editor.AttributeField
 import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.model.EditorState
 

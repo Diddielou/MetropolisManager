@@ -1,6 +1,5 @@
 package metropolis.xtracted.controller.editor
 
-import java.util.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cached
 import androidx.compose.material.icons.filled.Redo
@@ -9,6 +8,7 @@ import androidx.compose.material.icons.filled.Undo
 import androidx.compose.ui.graphics.vector.ImageVector
 import metropolis.xtracted.controller.Action
 import metropolis.xtracted.model.Attribute
+import java.util.*
 
 sealed class EditorAction(
         override val name   : String,

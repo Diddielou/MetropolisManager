@@ -1,26 +1,13 @@
 package metropolis.xtracted.view
 
 import androidx.compose.foundation.*
-import java.awt.Cursor
-import java.awt.Toolkit
-import java.io.IOException
-import java.io.InputStream
-import java.net.URL
-import java.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -37,9 +24,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.model.MasterDetailState
 import metropolis.xtracted.repository.Identifiable
+import java.awt.Cursor
+import java.awt.Toolkit
+import java.io.IOException
+import java.io.InputStream
+import java.net.URL
+import java.util.*
 
 
 @Composable

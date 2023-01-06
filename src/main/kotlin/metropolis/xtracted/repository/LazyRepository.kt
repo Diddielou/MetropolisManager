@@ -1,9 +1,9 @@
 package metropolis.xtracted.repository
 
-import java.sql.ResultSet
 import metropolis.xtracted.data.DbColumn
 import metropolis.xtracted.data.Filter
 import metropolis.xtracted.data.SortDirective
+import java.sql.ResultSet
 
 class LazyRepository<T>(private val url        : String,
                         private val table      : String,

@@ -14,8 +14,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.countries.shared.data.Country
-import metropolis.xtracted.model.TableState
 import metropolis.xtracted.controller.lazyloading.LazyTableAction
+import metropolis.xtracted.model.TableState
 import metropolis.xtracted.view.explorer.Table
 
 @Composable

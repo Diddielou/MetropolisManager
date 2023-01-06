@@ -3,7 +3,6 @@ package metropolis.cities.combined.controller
 import metropolis.cities.editor.controller.cityEditorController
 import metropolis.cities.explorer.controller.cityLazyTableController
 import metropolis.cities.shared.data.City
-import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.controller.masterDetail.MasterDetailController
 import metropolis.xtracted.repository.CrudRepository

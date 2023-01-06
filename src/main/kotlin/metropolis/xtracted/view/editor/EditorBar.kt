@@ -1,6 +1,5 @@
 package metropolis.xtracted.view.editor
 
-import java.util.*
 import androidx.compose.runtime.Composable
 import metropolis.xtracted.controller.editor.EditorAction
 import metropolis.xtracted.model.EditorState
@@ -8,6 +7,7 @@ import metropolis.xtracted.view.ActionIconStrip
 import metropolis.xtracted.view.AlignLeftRight
 import metropolis.xtracted.view.CH
 import metropolis.xtracted.view.Toolbar
+import java.util.*
 
 @Composable
 fun EditorBar(state: EditorState<*>, trigger : (EditorAction) -> Unit) {

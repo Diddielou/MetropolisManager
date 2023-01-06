@@ -1,7 +1,6 @@
 package metropolis.cities.shared.data
 
 import metropolis.xtracted.repository.Identifiable
-import java.time.LocalDate
 
 data class City(override val id     : Int,
                 val name            : String,

@@ -1,7 +1,7 @@
 package metropolis.xtracted.repository
 
-import java.sql.ResultSet
 import metropolis.xtracted.data.DbColumn
+import java.sql.ResultSet
 
 class CrudRepository<D: Identifiable>(private val url        : String,
                                       private val table      : String,

@@ -13,7 +13,7 @@ import metropolis.cities.explorer.view.CityExplorerUI
 import metropolis.cities.shared.data.City
 import metropolis.xtracted.controller.masterDetail.MasterDetailAction
 import metropolis.xtracted.model.MasterDetailState
-import metropolis.xtracted.view.*
+import metropolis.xtracted.view.MasterDetailUi
 
 @Composable
 fun ApplicationScope.CitiesModuleWindow(state: MasterDetailState<City>, trigger: (MasterDetailAction) -> Unit) {

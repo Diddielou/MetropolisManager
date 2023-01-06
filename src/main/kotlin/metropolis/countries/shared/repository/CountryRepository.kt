@@ -1,8 +1,8 @@
 package metropolis.countries.shared.repository
 
 import metropolis.countries.shared.data.Country
-import metropolis.xtracted.data.DbColumn
 import metropolis.countries.shared.repository.CountryColumn.*
+import metropolis.xtracted.data.DbColumn
 import metropolis.xtracted.repository.CrudRepository
 import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.asSql

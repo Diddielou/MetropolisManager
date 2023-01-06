@@ -8,7 +8,6 @@ import metropolis.countries.shared.repository.countryLazyTableRepository
 import metropolis.metropolis.controller.MetropolisController
 import metropolis.metropolis.view.MetropolisWindow
 import metropolis.xtracted.repository.urlFromResources
-import metropolis.xtracted.repository.urlFromWorkingDirectory
 
 fun main() {
 

@@ -1,10 +1,10 @@
 package metropolis.cities.shared.repository
 
 import metropolis.cities.shared.data.City
-import metropolis.xtracted.data.DbColumn
-import metropolis.xtracted.repository.LazyRepository
-import metropolis.xtracted.repository.CrudRepository
 import metropolis.cities.shared.repository.CityColumn.*
+import metropolis.xtracted.data.DbColumn
+import metropolis.xtracted.repository.CrudRepository
+import metropolis.xtracted.repository.LazyRepository
 import metropolis.xtracted.repository.asSql
 import java.time.LocalDate
 

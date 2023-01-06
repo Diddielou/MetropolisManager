@@ -1,6 +1,5 @@
 package metropolis.countries.combined
 
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.countries.combined.controller.CountriesModuleController
 import metropolis.countries.combined.view.CountriesModuleWindow

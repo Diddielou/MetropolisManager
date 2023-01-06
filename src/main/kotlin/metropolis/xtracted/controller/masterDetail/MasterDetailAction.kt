@@ -6,8 +6,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.ui.graphics.vector.ImageVector
-import metropolis.cities.shared.data.City
-import metropolis.countries.shared.data.Country
 import metropolis.xtracted.controller.Action
 import metropolis.xtracted.controller.editor.EditorController
 import metropolis.xtracted.controller.lazyloading.LazyTableController

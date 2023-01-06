@@ -1,8 +1,8 @@
 package metropolis.xtracted.model
 
+import metropolis.xtracted.view.format
 import java.text.DecimalFormatSymbols
 import java.util.*
-import metropolis.xtracted.view.format
 
 data class Attribute<T : Any>(val id                 : AttributeId,
                               val value              : T?,

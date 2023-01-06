@@ -1,7 +1,7 @@
 package metropolis.xtracted.model
 
-import java.util.*
 import metropolis.xtracted.view.CH
+import java.util.*
 
 data class EditorState<D>(val title      : Translatable,
                           val locale     : Locale             = CH,
